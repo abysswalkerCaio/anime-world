@@ -1,6 +1,5 @@
 <template>
-  <main class="py-20">
-  </main>
+  <main class="py-20"></main>
 </template>
 
 <script>
