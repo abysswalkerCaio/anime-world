@@ -1,6 +1,6 @@
 <template>
   <header
-    class="bg-zinc-800 fixed w-full h-16 flex items-center justify-between md:justify-around pl-5 md:px-5"
+    class="bg-zinc-800 fixed w-full h-16 flex items-center justify-between z-10 md:justify-around pl-5 md:px-5"
   >
     <h1 class="text-orange-500 h-full flex items-center justify-center">
       Anime World
@@ -18,19 +18,18 @@
         >
           <NuxtLink
             class="cursor-pointer w-full text-end hover:bg-zinc-700 px-5 py-2"
-            >Anime</NuxtLink
+            >Animes</NuxtLink
           >
           <NuxtLink
             class="cursor-pointer w-full text-end hover:bg-zinc-700 px-5 py-2"
-            >Characters</NuxtLink
+            >Mangás</NuxtLink
           >
           <NuxtLink
             class="cursor-pointer w-full text-end hover:bg-zinc-700 px-5 py-2"
-            >Seasons</NuxtLink
-          >
-          <NuxtLink
+            >Revistas</NuxtLink
+          ><NuxtLink
             class="cursor-pointer w-full text-end hover:bg-zinc-700 px-5 py-2"
-            >Top</NuxtLink
+            >Temporadas</NuxtLink
           >
           <div
             @click="openSubmenu"
@@ -38,7 +37,7 @@
           >
             <font-awesome-icon v-if="subActive" :icon="'fa-chevron-up'" />
             <font-awesome-icon v-else :icon="'fa-chevron-down'" />
-            <span>Genres</span>
+            <span>Gêneros</span>
           </div>
           <div
             v-if="subActive"
@@ -52,24 +51,19 @@
           </div>
           <NuxtLink
             class="cursor-pointer w-full text-end hover:bg-zinc-700 px-5 py-2 border-t-2 border-zinc-700"
-            >Magazines</NuxtLink
+            >Personagens</NuxtLink
           >
           <NuxtLink
             class="cursor-pointer w-full text-end hover:bg-zinc-700 px-5 py-2"
-            >Manga</NuxtLink
+            >Pessoas</NuxtLink
           >
           <NuxtLink
             class="cursor-pointer w-full text-end hover:bg-zinc-700 px-5 py-2"
-            >People</NuxtLink
-          >
-          <NuxtLink
-            class="cursor-pointer w-full text-end hover:bg-zinc-700 px-5 py-2"
-            >Producers</NuxtLink
+            >Produtores</NuxtLink
           >
         </div>
       </nav>
     </div>
-    <!-- Anime/Personagens/Gêneros/Produtores/Recomendações/Temporadas/Melhores -->
   </header>
 </template>
 
