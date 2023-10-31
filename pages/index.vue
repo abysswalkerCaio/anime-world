@@ -1,32 +1,16 @@
 <template>
-  <main class="py-20 px-5">
-    <h1>Animes</h1>
-    <span v-if="top_anime.length < 1" class="opacity-70"
-      >Carregando informações...</span
-    >
-    <div v-for="animes in top_anime">
-      <span class="opacity-70">{{ animes.title_english }}</span>
-    </div>
-    <h1 class="mt-5">Mangás</h1>
-    <span v-if="top_manga.length < 1" class="opacity-70"
-      >Carregando informações...</span
-    >
-    <div v-for="mangas in top_manga">
-      <span class="opacity-70">{{ mangas.title_english }}</span>
-    </div>
-    <h1 class="mt-5">Personagens</h1>
-    <span v-if="top_character.length < 1" class="opacity-70"
-      >Carregando informações...</span
-    >
-    <div v-for="characters in top_character">
-      <span class="opacity-70">{{ characters.name }}</span>
-    </div>
-    <h1 class="mt-5">Pessoas</h1>
-    <span v-if="top_people.length < 1" class="opacity-70"
-      >Carregando informações...</span
-    >
-    <div v-for="people in top_people">
-      <span class="opacity-70">{{ people.name }}</span>
+  <main class="py-16 px-20">
+    <Carousel />
+    <div class="flex flex-col">
+      <h1 class="mt-5">Animes</h1>
+      <div class="flex flex-col">
+        <span v-if="top_anime.length < 1" class="opacity-70"
+          >Carregando informações...</span
+        >
+        <div v-for="(animes, index) in top_anime" :key="index">
+          <img :src="animes.images.jpg.image_url" />
+        </div>
+      </div>
     </div>
   </main>
 </template>
