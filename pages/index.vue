@@ -1,16 +1,7 @@
 <template>
-  <main class="py-16 px-20">
-    <Carousel />
-    <div class="flex flex-col">
-      <h1 class="mt-5">Animes</h1>
-      <div class="flex flex-col">
-        <span v-if="top_anime.length < 1" class="opacity-70"
-          >Carregando informações...</span
-        >
-        <div v-for="(animes, index) in top_anime" :key="index">
-          <img :src="animes.images.jpg.image_url" />
-        </div>
-      </div>
+  <main class="py-16 px-5 md:px-32 lg:px-36 xl:px-72 2xl:px-80">
+    <div class="bg-red-500 h-96 flex text-5xl font-bold items-center justify-center">
+      Anime World Banner
     </div>
   </main>
 </template>
