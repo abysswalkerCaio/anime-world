@@ -1,7 +1,36 @@
 <template>
-  <main class="py-16 px-5 md:px-32 lg:px-36 xl:px-72 2xl:px-80">
-    <div class="bg-red-500 h-96 flex text-5xl font-bold items-center justify-center">
-      Anime World Banner
+  <main class="px-5 py-16 flex flex-col md:px-0 md:items-center">
+    <div class="h-full w-full md:flex-none md:w-[728px] lg:w-[984px]">
+      <div
+        class="bg-red-500 h-96 w-full flex items-center justify-center text-5xl font-bold"
+      ></div>
+      <div class="mt-5">
+        <div
+          class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
+        >
+          <h1 class="ml-2 text-xl font-bold">TOP ANIMES</h1>
+          <div class="cursor-pointer">
+            <NuxtLink class="font-semibold"
+              >VER TODOS
+              <font-awesome-icon
+                class="text-sm"
+                :icon="'arrow-right'"
+              ></font-awesome-icon>
+            </NuxtLink>
+          </div>
+        </div>
+        <div
+          class="mt-5 grid gap-4 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
+        >
+          <div v-for="animes in top_anime">
+            <AnimeCard
+              :image="animes.images.jpg.large_image_url"
+              :title="animes.title_english"
+              :status="animes.status"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>

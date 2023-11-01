@@ -75,7 +75,7 @@
       to="/"
       class="text-red-500 text-lg font-bold h-full flex items-center justify-center"
     >
-      Anime World
+      <img src="../img/Anime World Logo.png" />
     </NuxtLink>
   </header>
 </template>
