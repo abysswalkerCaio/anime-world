@@ -2,11 +2,13 @@
   <main class="px-5 py-16 flex flex-col md:px-0 md:items-center">
     <div class="h-full w-full md:flex-none md:w-[728px] lg:w-[984px]">
       <div
-        class="bg-red-500 flex-none object-cover h-auto w-full flex items-center justify-center text-5xl font-bold"
+        class="flex-none object-cover h-auto w-full flex items-center justify-center text-5xl font-bold"
       >
-        <img src="../img/Anime World Banner.png" />
+        <img src="../img/anime-world-banner.png" />
       </div>
-      <div class="mt-5">
+
+      <!-- Top Animes -->
+      <div class="mt-10">
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
@@ -36,17 +38,154 @@
           v-else
           class="mt-5 grid gap-5 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
         >
-          <div v-for="animes in top_anime">
-            <AnimeCard
+          <div v-for="animes in top_anime.slice(0, 6)">
+            <AnimesTopAnimeCard
               :id="animes.mal_id"
               :image="animes.images.jpg.large_image_url"
-              :title="animes.title_english"
+              :title="animes.title"
+              :title_japanese="animes.title_japanese"
               :genre="animes.genres"
               :synopsis="animes.synopsis"
             />
           </div>
         </div>
       </div>
+      <!-- Fim Top Animes -->
+
+      <!-- Top Mangás -->
+      <div class="mt-10">
+        <div
+          class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
+        >
+          <h1 class="ml-2 md:text-xl font-bold">TOP MANGÁS</h1>
+          <div class="cursor-pointer">
+            <NuxtLink class="font-semibold"
+              >VER TODOS
+              <font-awesome-icon
+                class="text-xs md:text-sm"
+                :icon="'arrow-right'"
+              ></font-awesome-icon>
+            </NuxtLink>
+          </div>
+        </div>
+        <div v-if="top_manga.length < 1">
+          <div
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-2xl md:text-5xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+          >
+            <h1 class="text-transparent">Buscando maravilhas...</h1>
+            <font-awesome-icon
+              class="text-red-500 fa-spin"
+              :icon="'spinner'"
+            ></font-awesome-icon>
+          </div>
+        </div>
+        <div
+          v-else
+          class="mt-5 grid gap-5 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
+        >
+          <div v-for="mangas in top_manga.slice(0, 6)">
+            <MangasTopMangaCard
+              :id="mangas.mal_id"
+              :image="mangas.images.jpg.large_image_url"
+              :title="mangas.title"
+              :title_japanese="mangas.title_japanese"
+              :genre="mangas.genres"
+              :synopsis="mangas.synopsis"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Fim Top Mangás -->
+
+      <!-- Top Characters -->
+      <div class="mt-10">
+        <div
+          class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
+        >
+          <h1 class="ml-2 md:text-xl font-bold">TOP PERSONAGENS</h1>
+          <div class="cursor-pointer">
+            <NuxtLink class="font-semibold"
+              >VER TODOS
+              <font-awesome-icon
+                class="text-xs md:text-sm"
+                :icon="'arrow-right'"
+              ></font-awesome-icon>
+            </NuxtLink>
+          </div>
+        </div>
+        <div v-if="top_character.length < 1">
+          <div
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-2xl md:text-5xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+          >
+            <h1 class="text-transparent">Desbravando lendas...</h1>
+            <font-awesome-icon
+              class="text-red-500 fa-spin"
+              :icon="'spinner'"
+            ></font-awesome-icon>
+          </div>
+        </div>
+        <div
+          v-else
+          class="mt-5 grid gap-5 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
+        >
+          <div v-for="characters in top_character.slice(0, 6)">
+            <CharactersTopCharacterCard
+              :id="characters.mal_id"
+              :image="characters.images.jpg.image_url"
+              :name="characters.name"
+              :name_kanji="characters.name_kanji"
+              :nickname="characters.nicknames"
+              :about="characters.about"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Fim Top Personagens -->
+
+      <!-- Top Artistas -->
+      <div class="mt-10">
+        <div
+          class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
+        >
+          <h1 class="ml-2 md:text-xl font-bold">TOP ARTISTAS</h1>
+          <div class="cursor-pointer">
+            <NuxtLink class="font-semibold"
+              >VER TODOS
+              <font-awesome-icon
+                class="text-xs md:text-sm"
+                :icon="'arrow-right'"
+              ></font-awesome-icon>
+            </NuxtLink>
+          </div>
+        </div>
+        <div v-if="top_people.length < 1">
+          <div
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-2xl md:text-5xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+          >
+            <h1 class="text-transparent">Artistas? Só um segundo...</h1>
+            <font-awesome-icon
+              class="text-red-500 fa-spin"
+              :icon="'spinner'"
+            ></font-awesome-icon>
+          </div>
+        </div>
+        <div
+          v-else
+          class="mt-5 grid gap-5 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
+        >
+          <div v-for="people in top_people.slice(0, 6)">
+            <PeopleTopPeopleCard
+              :id="people.mal_id"
+              :image="people.images.jpg.image_url"
+              :name="people.name"
+              :given_name="people.given_name"
+              :alternate_name="people.alternate_names"
+              :about="people.about"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Fim Top Artistas -->
     </div>
   </main>
 </template>

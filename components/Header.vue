@@ -3,80 +3,100 @@
     class="bg-zinc-800 fixed w-full h-16 flex items-center z-10 gap-2 md:justify-around md:px-5"
   >
     <div
-      :class="'cursor-pointer w-16 h-full text-center hover:bg-zinc-950 md:hidden'"
+      class="cursor-default h-full md:hidden inline-block px-6 hover:bg-zinc-950 group"
     >
-      <button @click="active = !active" class="h-full w-full">
-        <font-awesome-icon class="text-2xl" v-if="active" :icon="'fa-times'" />
-        <font-awesome-icon class="text-2xl" v-else :icon="'fa-bars'" />
-      </button>
-      <nav>
-        <transition class="navbar">
-          <div
-            v-show="active"
-            class="navbar bg-zinc-950 cursor-default absolute w-60 overflow-y-auto h-[322px] z-10 flex flex-col"
-          >
-            <NuxtLink
-              to="/animes"
-              class="cursor-pointer w-full text-start hover:bg-zinc-700 px-5 py-2"
-              >Animes</NuxtLink
-            >
-            <NuxtLink
-              to="/mangas"
-              class="cursor-pointer w-full text-start hover:bg-zinc-700 px-5 py-2"
-              >Mangás</NuxtLink
-            >
-            <NuxtLink
-              to="magazines"
-              class="cursor-pointer w-full text-start hover:bg-zinc-700 px-5 py-2"
-              >Revistas</NuxtLink
-            ><NuxtLink
-              to="seasons"
-              class="cursor-pointer w-full text-start hover:bg-zinc-700 px-5 py-2"
-              >Temporadas</NuxtLink
-            >
-            <div
-              @click="subActive = !subActive"
-              class="cursor-pointer w-full text-start flex justify-between items-center hover:bg-zinc-700 px-5 py-2"
-            >
-              <span>Gêneros</span>
-              <font-awesome-icon v-if="subActive" :icon="'fa-chevron-up'" />
-              <font-awesome-icon v-else :icon="'fa-chevron-down'" />
-            </div>
-            <div
-              v-show="subActive"
-              class="cursor-pointer w-full text-sm text-start bg-neutral-800"
-            >
-              <span
-                class="flex flex-col hover:bg-neutral-900 px-7 py-2"
-                v-for="genre in genres"
-                >{{ genre.name }}</span
-              >
-            </div>
-            <NuxtLink
-              to="characters"
-              class="cursor-pointer w-full text-start hover:bg-zinc-700 px-5 py-2"
-              >Personagens</NuxtLink
-            >
-            <NuxtLink
-              to="people"
-              class="cursor-pointer w-full text-start hover:bg-zinc-700 px-5 py-2"
-              >Pessoas</NuxtLink
-            >
-            <NuxtLink
-              to="producers"
-              class="cursor-pointer w-full text-start hover:bg-zinc-700 px-5 py-2"
-              >Produtores</NuxtLink
-            >
-          </div>
-        </transition>
-      </nav>
+      <div class="relative flex items-center justify-center gap-2 h-full">
+        <font-awesome-icon
+          class="text-xl absolute group-hover:rotate-180 transition duration-150 group-hover:opacity-0"
+          :icon="'fa-bars'"
+        />
+        <font-awesome-icon
+          class="text-xl opacity-0 group-hover:rotate-180 transition duration-150 group-hover:opacity-100"
+          :icon="'fa-times'"
+        />
+      </div>
+      <div
+        class="hidden absolute left-0 z-10 w-60 h-fit bg-zinc-950 group-hover:flex group-hover:flex-col"
+      >
+        <NuxtLink to="/animes" class="px-4 py-2 hover:bg-zinc-700 w-full"
+          >Animes</NuxtLink
+        >
+        <NuxtLink to="/seasons" class="px-4 py-2 hover:bg-zinc-700 w-full"
+          >Temporadas</NuxtLink
+        >
+        <NuxtLink to="/genres" class="px-4 py-2 hover:bg-zinc-700 w-full"
+          >Gêneros</NuxtLink
+        >
+        <NuxtLink to="/characters" class="px-4 py-2 hover:bg-zinc-700 w-full"
+          >Personagens</NuxtLink
+        >
+        <NuxtLink to="/people" class="px-4 py-2 hover:bg-zinc-700 w-full"
+          >Artistas</NuxtLink
+        >
+        <NuxtLink to="/producers" class="px-4 py-2 hover:bg-zinc-700 w-full"
+          >Produtores</NuxtLink
+        >
+      </div>
     </div>
     <NuxtLink
       to="/"
       class="text-red-500 text-lg font-bold h-full flex items-center justify-center"
     >
-      <img src="../img/Anime World Logo.png" />
+      <img src="../img/anime-world-logo.png" />
     </NuxtLink>
+    <nav class="max-[767px]:hidden flex h-full">
+      <NuxtLink to="/mangas" class="flex items-center px-5 hover:bg-zinc-950"
+        >Mangás</NuxtLink
+      >
+      <NuxtLink to="/magazines" class="flex items-center px-5 hover:bg-zinc-950"
+        >Revistas</NuxtLink
+      >
+      <div
+        class="relative cursor-default inline-block px-5 hover:bg-zinc-950 group"
+      >
+        <div class="flex items-center gap-2 h-full">
+          Navegar
+          <font-awesome-icon
+            class="text-xs group-hover:rotate-180 transition duration-150"
+            :icon="'chevron-down'"
+          />
+        </div>
+        <div
+          class="hidden absolute z-10 right-0 w-60 h-fit bg-zinc-950 group-hover:flex group-hover:flex-col"
+        >
+          <NuxtLink
+            to="/animes"
+            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
+            >Animes</NuxtLink
+          >
+          <NuxtLink
+            to="/seasons"
+            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
+            >Temporadas</NuxtLink
+          >
+          <NuxtLink
+            to="/genres"
+            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
+            >Gêneros</NuxtLink
+          >
+          <NuxtLink
+            to="/characters"
+            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
+            >Personagens</NuxtLink
+          >
+          <NuxtLink
+            to="/people"
+            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
+            >Artistas</NuxtLink
+          >
+          <NuxtLink
+            to="/producers"
+            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
+            >Produtores</NuxtLink
+          >
+        </div>
+      </div>
+    </nav>
   </header>
 </template>
 
@@ -85,8 +105,8 @@ export default {
   data() {
     return {
       genres: [],
-      active: false,
-      subActive: false,
+      mobileMenu: false,
+      mobileSubmenu: false,
     };
   },
   mounted() {
@@ -102,15 +122,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.2s ease-in-out;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>
