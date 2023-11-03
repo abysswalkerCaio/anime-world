@@ -21,13 +21,21 @@
         <NuxtLink to="/animes" class="px-4 py-2 hover:bg-zinc-700 w-full"
           >Animes</NuxtLink
         >
+        <NuxtLink to="/mangas" class="px-4 py-2 hover:bg-zinc-700 w-full"
+          >Mangás</NuxtLink
+        >
+        <NuxtLink to="/magazines" class="px-4 py-2 hover:bg-zinc-700 w-full"
+          >Revistas</NuxtLink
+        >
         <NuxtLink to="/seasons" class="px-4 py-2 hover:bg-zinc-700 w-full"
           >Temporadas</NuxtLink
         >
         <NuxtLink to="/genres" class="px-4 py-2 hover:bg-zinc-700 w-full"
           >Gêneros</NuxtLink
         >
-        <NuxtLink to="/characters" class="px-4 py-2 hover:bg-zinc-700 w-full"
+        <NuxtLink
+          to="/characters"
+          class="px-4 border-zinc-700 border-t-2 py-2 hover:bg-zinc-700 w-full"
           >Personagens</NuxtLink
         >
         <NuxtLink to="/people" class="px-4 py-2 hover:bg-zinc-700 w-full"
@@ -45,6 +53,9 @@
       <img src="../img/anime-world-logo.png" />
     </NuxtLink>
     <nav class="max-[767px]:hidden flex h-full">
+      <NuxtLink to="/animes" class="flex items-center px-5 hover:bg-zinc-950"
+        >Animes</NuxtLink
+      >
       <NuxtLink to="/mangas" class="flex items-center px-5 hover:bg-zinc-950"
         >Mangás</NuxtLink
       >
@@ -65,11 +76,6 @@
           class="hidden absolute z-10 right-0 w-60 h-fit bg-zinc-950 group-hover:flex group-hover:flex-col"
         >
           <NuxtLink
-            to="/animes"
-            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
-            >Animes</NuxtLink
-          >
-          <NuxtLink
             to="/seasons"
             class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
             >Temporadas</NuxtLink
@@ -81,7 +87,7 @@
           >
           <NuxtLink
             to="/characters"
-            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
+            class="px-4 py-2 border-zinc-700 border-t-2 hover:bg-zinc-700 w-full text-end"
             >Personagens</NuxtLink
           >
           <NuxtLink

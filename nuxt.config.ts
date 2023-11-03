@@ -28,9 +28,14 @@ export default defineNuxtConfig({
       "@fortawesome/vue-fontawesome",
       "@fortawesome/fontawesome-svg-core",
       "@fortawesome/free-solid-svg-icons",
+      "vuetify",
     ],
   },
-  css: ["@fortawesome/fontawesome-svg-core/styles.css"],
+  css: [
+    "@fortawesome/fontawesome-svg-core/styles.css",
+    "vuetify/lib/styles/main.sass",
+    "@mdi/font/css/materialdesignicons.min.css",
+  ],
   devtools: { enabled: true },
   modules: ["@nuxt/ui"],
 });

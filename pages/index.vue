@@ -13,15 +13,15 @@
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
           <h1 class="ml-2 md:text-xl font-bold">TOP ANIMES</h1>
-          <div class="cursor-pointer">
-            <NuxtLink class="font-semibold"
-              >VER TODOS
-              <font-awesome-icon
-                class="text-xs md:text-sm"
-                :icon="'arrow-right'"
-              ></font-awesome-icon>
-            </NuxtLink>
-          </div>
+          <NuxtLink
+            to="/animes"
+            class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
+            >VER TODOS
+            <font-awesome-icon
+              class="text-xs md:text-sm"
+              :icon="'arrow-right'"
+            ></font-awesome-icon>
+          </NuxtLink>
         </div>
         <div v-if="top_anime.length < 1">
           <div
@@ -58,15 +58,15 @@
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
           <h1 class="ml-2 md:text-xl font-bold">TOP MANGÁS</h1>
-          <div class="cursor-pointer">
-            <NuxtLink class="font-semibold"
-              >VER TODOS
-              <font-awesome-icon
-                class="text-xs md:text-sm"
-                :icon="'arrow-right'"
-              ></font-awesome-icon>
-            </NuxtLink>
-          </div>
+          <NuxtLink
+            to="/mangas"
+            class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
+            >VER TODOS
+            <font-awesome-icon
+              class="text-xs md:text-sm"
+              :icon="'arrow-right'"
+            ></font-awesome-icon>
+          </NuxtLink>
         </div>
         <div v-if="top_manga.length < 1">
           <div
@@ -103,15 +103,15 @@
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
           <h1 class="ml-2 md:text-xl font-bold">TOP PERSONAGENS</h1>
-          <div class="cursor-pointer">
-            <NuxtLink class="font-semibold"
-              >VER TODOS
-              <font-awesome-icon
-                class="text-xs md:text-sm"
-                :icon="'arrow-right'"
-              ></font-awesome-icon>
-            </NuxtLink>
-          </div>
+          <NuxtLink
+            to="/characters"
+            class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
+            >VER TODOS
+            <font-awesome-icon
+              class="text-xs md:text-sm"
+              :icon="'arrow-right'"
+            ></font-awesome-icon>
+          </NuxtLink>
         </div>
         <div v-if="top_character.length < 1">
           <div
@@ -148,15 +148,15 @@
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
           <h1 class="ml-2 md:text-xl font-bold">TOP ARTISTAS</h1>
-          <div class="cursor-pointer">
-            <NuxtLink class="font-semibold"
-              >VER TODOS
-              <font-awesome-icon
-                class="text-xs md:text-sm"
-                :icon="'arrow-right'"
-              ></font-awesome-icon>
-            </NuxtLink>
-          </div>
+          <NuxtLink
+            to="/people"
+            class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
+            >VER TODOS
+            <font-awesome-icon
+              class="text-xs md:text-sm"
+              :icon="'arrow-right'"
+            ></font-awesome-icon>
+          </NuxtLink>
         </div>
         <div v-if="top_people.length < 1">
           <div
