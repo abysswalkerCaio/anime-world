@@ -30,12 +30,9 @@
         <NuxtLink to="/seasons" class="px-4 py-2 hover:bg-zinc-700 w-full"
           >Temporadas</NuxtLink
         >
-        <NuxtLink to="/genres" class="px-4 py-2 hover:bg-zinc-700 w-full"
-          >Gêneros</NuxtLink
-        >
         <NuxtLink
           to="/characters"
-          class="px-4 border-zinc-700 border-t-2 py-2 hover:bg-zinc-700 w-full"
+          class="px-4 py-2 hover:bg-zinc-700 w-full"
           >Personagens</NuxtLink
         >
         <NuxtLink to="/people" class="px-4 py-2 hover:bg-zinc-700 w-full"
@@ -81,13 +78,8 @@
             >Temporadas</NuxtLink
           >
           <NuxtLink
-            to="/genres"
-            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
-            >Gêneros</NuxtLink
-          >
-          <NuxtLink
             to="/characters"
-            class="px-4 py-2 border-zinc-700 border-t-2 hover:bg-zinc-700 w-full text-end"
+            class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
             >Personagens</NuxtLink
           >
           <NuxtLink
@@ -105,26 +97,3 @@
     </nav>
   </header>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      genres: [],
-      mobileMenu: false,
-      mobileSubmenu: false,
-    };
-  },
-  mounted() {
-    this.loadGenres();
-  },
-  methods: {
-    async loadGenres() {
-      const data = await $fetch("https://api.jikan.moe/v4/genres/anime").catch(
-        (error) => error.data
-      );
-      this.genres = data.data;
-    },
-  },
-};
-</script>

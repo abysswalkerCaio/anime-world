@@ -21,7 +21,7 @@
     <!-- Card -->
     <div>
       <img
-        class="object-cover h-[400px] w-full rounded-xl"
+        class="object-cover h-[510px] w-full rounded-xl shadow-lg shadow-red-900/50"
         :src="image"
       />
     </div>

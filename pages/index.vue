@@ -1,6 +1,6 @@
 <template>
   <main class="px-5 py-16 flex flex-col md:px-0 md:items-center">
-    <div class="h-full w-full md:flex-none md:w-[728px] lg:w-[984px]">
+    <div class="h-full w-full lg:w-[984px]">
       <div
         class="flex-none object-cover h-auto w-full flex items-center justify-center text-5xl font-bold"
       >
@@ -36,10 +36,10 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="animes in top_anime.slice(0, 6)">
-            <AnimesTopAnimeCard
+            <AnimesAnimeCard
               :id="animes.mal_id"
               :image="animes.images.jpg.large_image_url"
               :title="animes.title"
@@ -81,10 +81,10 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="mangas in top_manga.slice(0, 6)">
-            <MangasTopMangaCard
+            <MangasMangaCard
               :id="mangas.mal_id"
               :image="mangas.images.jpg.large_image_url"
               :title="mangas.title"
@@ -126,10 +126,10 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="characters in top_character.slice(0, 6)">
-            <CharactersTopCharacterCard
+            <CharactersCharacterCard
               :id="characters.mal_id"
               :image="characters.images.jpg.image_url"
               :name="characters.name"
@@ -171,10 +171,10 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="people in top_people.slice(0, 6)">
-            <PeopleTopPeopleCard
+            <PeopleCard
               :id="people.mal_id"
               :image="people.images.jpg.image_url"
               :name="people.name"
