@@ -18,7 +18,7 @@
             class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
             >VER TODOS
             <font-awesome-icon
-              class="text-xs md:text-sm"
+              class="text-xs md:text-sm h-full"
               :icon="'arrow-right'"
             ></font-awesome-icon>
           </NuxtLink>
@@ -38,7 +38,7 @@
           v-else
           class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
         >
-          <div v-for="animes in top_anime.slice(0, 6)">
+          <div v-for="animes in top_anime">
             <AnimesAnimeCard
               :id="animes.mal_id"
               :image="animes.images.jpg.large_image_url"
@@ -49,6 +49,22 @@
             />
           </div>
         </div>
+      </div>
+      <div class="text-center">
+        <v-container>
+          <v-row justify="center">
+            <v-col cols="8">
+              <v-container class="max-width">
+                <v-pagination
+                  v-model="anime_page"
+                  class="my-4"
+                  :length="anime_pagination.last_visible_page"
+                  @click="loadTopAnimes"
+                ></v-pagination>
+              </v-container>
+            </v-col>
+          </v-row>
+        </v-container>
       </div>
       <!-- Fim Top Animes -->
 
@@ -83,7 +99,7 @@
           v-else
           class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
         >
-          <div v-for="mangas in top_manga.slice(0, 6)">
+          <div v-for="mangas in top_manga">
             <MangasMangaCard
               :id="mangas.mal_id"
               :image="mangas.images.jpg.large_image_url"
@@ -128,7 +144,7 @@
           v-else
           class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
         >
-          <div v-for="characters in top_character.slice(0, 6)">
+          <div v-for="characters in top_character">
             <CharactersCharacterCard
               :id="characters.mal_id"
               :image="characters.images.jpg.image_url"
@@ -173,7 +189,7 @@
           v-else
           class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
         >
-          <div v-for="people in top_people.slice(0, 6)">
+          <div v-for="people in top_people">
             <PeopleCard
               :id="people.mal_id"
               :image="people.images.jpg.image_url"
@@ -191,13 +207,20 @@
 </template>
 
 <script>
+import { VDataTable } from "vuetify/labs/VDataTable";
+
 export default {
+  components: {
+    VDataTable,
+  },
   data() {
     return {
       top_anime: [],
       top_manga: [],
       top_character: [],
       top_people: [],
+      anime_pagination: [],
+      anime_page: 1,
     };
   },
   created() {
@@ -210,27 +233,28 @@ export default {
   },
   methods: {
     async loadTopAnimes() {
-      const data = await $fetch("https://api.jikan.moe/v4/top/anime").catch(
-        (error) => error.data
-      );
+      const data = await $fetch(
+        `https://api.jikan.moe/v4/top/anime?page=${this.anime_page}&limit=6`
+      ).catch((error) => error.data);
       this.top_anime = data.data;
+      this.anime_pagination = data.pagination;
     },
     async loadTopMangas() {
-      const data = await $fetch("https://api.jikan.moe/v4/top/manga").catch(
-        (error) => error.data
-      );
+      const data = await $fetch(
+        "https://api.jikan.moe/v4/top/manga?limit=6"
+      ).catch((error) => error.data);
       this.top_manga = data.data;
     },
     async loadTopCharacters() {
       const data = await $fetch(
-        "https://api.jikan.moe/v4/top/characters"
+        "https://api.jikan.moe/v4/top/characters?limit=6"
       ).catch((error) => error.data);
       this.top_character = data.data;
     },
     async loadTopPeople() {
-      const data = await $fetch("https://api.jikan.moe/v4/top/people").catch(
-        (error) => error.data
-      );
+      const data = await $fetch(
+        "https://api.jikan.moe/v4/top/people?limit=6"
+      ).catch((error) => error.data);
       this.top_people = data.data;
     },
   },

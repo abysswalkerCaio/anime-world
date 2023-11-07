@@ -20,7 +20,10 @@
     </div>
     <!-- Card -->
     <div>
-      <img class="object-cover w-full h-[510px] rounded-xl shadow-lg shadow-red-900/50" :src="image" />
+      <img
+        class="object-cover w-full h-[550px] min-[475px]:h-[400px] md:h-[425px] rounded-xl shadow-lg shadow-red-900/50"
+        :src="image"
+      />
     </div>
     <div class="flex flex-wrap gap-1 my-4">
       <div

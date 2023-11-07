@@ -1,5 +1,5 @@
 <template>
-  <div class="relative grid grid-rows-[1fr_120px] min-h-screen">
+  <div class="relative text-white grid grid-rows-[1fr_120px] min-h-screen">
     <Header></Header>
     <NuxtPage />
     <Footer></Footer>
