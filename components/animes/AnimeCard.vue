@@ -13,15 +13,18 @@
         ></font-awesome-icon>
       </NuxtLink>
       <div class="mt-5 w-full">
-        <p class="text-xs line-clamp-5">
+        <p v-if="synopsis" class="text-xs line-clamp-5">
           {{ synopsis }}
+        </p>
+        <p v-else class="text-xs line-clamp-5">
+          Sinopse não disponível.
         </p>
       </div>
     </div>
     <!-- Card -->
     <div>
       <img
-        class="object-cover w-full h-[550px] min-[475px]:h-[400px] md:h-[425px] rounded-xl shadow-lg shadow-red-900/50"
+        class="object-fill w-full h-[450px] rounded-xl shadow-lg shadow-red-900/50"
         :src="image"
       />
     </div>

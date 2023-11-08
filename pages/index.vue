@@ -2,9 +2,9 @@
   <main class="px-5 py-16 flex flex-col md:px-0 md:items-center">
     <div class="h-full w-full lg:w-[984px]">
       <div
-        class="flex-none object-cover h-auto w-full flex items-center justify-center text-5xl font-bold"
+        class="flex-none h-auto w-full flex items-center justify-center text-5xl font-bold"
       >
-        <img src="../img/anime-world-banner.png" />
+        <img src="../img/anime-world-full.png" />
       </div>
 
       <!-- Top Animes -->
@@ -12,13 +12,13 @@
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
-          <h1 class="ml-2 md:text-xl font-bold">TOP ANIMES</h1>
+          <h1 class="ml-2 md:text-xl font-bold">TOP 3 ANIMES</h1>
           <NuxtLink
             to="/animes"
             class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
             >VER TODOS
             <font-awesome-icon
-              class="text-xs md:text-sm h-full"
+              class="text-xs md:text-sm"
               :icon="'arrow-right'"
             ></font-awesome-icon>
           </NuxtLink>
@@ -50,22 +50,6 @@
           </div>
         </div>
       </div>
-      <div class="text-center">
-        <v-container>
-          <v-row justify="center">
-            <v-col cols="8">
-              <v-container class="max-width">
-                <v-pagination
-                  v-model="anime_page"
-                  class="my-4"
-                  :length="anime_pagination.last_visible_page"
-                  @click="loadTopAnimes"
-                ></v-pagination>
-              </v-container>
-            </v-col>
-          </v-row>
-        </v-container>
-      </div>
       <!-- Fim Top Animes -->
 
       <!-- Top Mangás -->
@@ -73,7 +57,7 @@
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
-          <h1 class="ml-2 md:text-xl font-bold">TOP MANGÁS</h1>
+          <h1 class="ml-2 md:text-xl font-bold">TOP 3 MANGÁS</h1>
           <NuxtLink
             to="/mangas"
             class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
@@ -118,7 +102,7 @@
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
-          <h1 class="ml-2 md:text-xl font-bold">TOP PERSONAGENS</h1>
+          <h1 class="ml-2 md:text-xl font-bold">TOP 3 PERSONAGENS</h1>
           <NuxtLink
             to="/characters"
             class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
@@ -163,7 +147,7 @@
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
-          <h1 class="ml-2 md:text-xl font-bold">TOP ARTISTAS</h1>
+          <h1 class="ml-2 md:text-xl font-bold">TOP 3 ARTISTAS</h1>
           <NuxtLink
             to="/people"
             class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
@@ -219,8 +203,6 @@ export default {
       top_manga: [],
       top_character: [],
       top_people: [],
-      anime_pagination: [],
-      anime_page: 1,
     };
   },
   created() {
@@ -234,26 +216,25 @@ export default {
   methods: {
     async loadTopAnimes() {
       const data = await $fetch(
-        `https://api.jikan.moe/v4/top/anime?page=${this.anime_page}&limit=6`
+        `https://api.jikan.moe/v4/top/anime?limit=3`
       ).catch((error) => error.data);
       this.top_anime = data.data;
-      this.anime_pagination = data.pagination;
     },
     async loadTopMangas() {
       const data = await $fetch(
-        "https://api.jikan.moe/v4/top/manga?limit=6"
+        "https://api.jikan.moe/v4/top/manga?limit=3"
       ).catch((error) => error.data);
       this.top_manga = data.data;
     },
     async loadTopCharacters() {
       const data = await $fetch(
-        "https://api.jikan.moe/v4/top/characters?limit=6"
+        "https://api.jikan.moe/v4/top/characters?limit=3"
       ).catch((error) => error.data);
       this.top_character = data.data;
     },
     async loadTopPeople() {
       const data = await $fetch(
-        "https://api.jikan.moe/v4/top/people?limit=6"
+        "https://api.jikan.moe/v4/top/people?limit=3"
       ).catch((error) => error.data);
       this.top_people = data.data;
     },

@@ -6,11 +6,18 @@
   </div>
 </template>
 
+<script setup>
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+theme.global.name.value = 'dark'
+</script>
+
 <style>
 html,
 body {
   --tw-bg-opacity: 1;
-  background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+  background-color: #000;
 }
 
 .page-enter-active,
