@@ -1,27 +1,17 @@
 <template>
-  <div class="flex flex-col relative group">
-    <div
-      class="absolute flex flex-col break-words w-full h-full top-0 left-0 right-0 cursor-default bg-zinc-900 p-2 font-bold description-anime opacity-0 group-hover:opacity-90 duration-300"
-    >
-      <NuxtLink
-        :to="`/mangas/${id}`"
-        class="flex justify-center items-center p-4 rounded-full self-end border-2 border-red-500 text-red-500 transition ease-in-out duration-300 hover:border-red-300 hover:text-red-300"
+  <NuxtLink :to="`/mangas/${id}`" class="flex flex-col relative group">
+    <div class="flex flex-col">
+      <div
+        class="absolute break-words w-full h-full top-0 left-0 right-0 bg-zinc-950 p-2 font-bold description-anime opacity-0 group-hover:opacity-90 duration-300"
       >
-        <font-awesome-icon
-          class="text-xl saiba-mais"
-          :icon="'arrow-right'"
-        ></font-awesome-icon>
-      </NuxtLink>
-      <div class="mt-5 w-full">
-        <p class="text-xs line-clamp-5">
-          {{ synopsis }}
-        </p>
+        <div class="mt-5 w-full">
+          <p class="text-xs line-clamp-5">
+            {{ synopsis }}
+          </p>
+        </div>
       </div>
-    </div>
-    <!-- Card -->
-    <div>
       <img
-        class="object-fill w-full h-[450px] rounded-xl shadow-lg shadow-red-900/50"
+        class="object-cover w-full h-[300px] min-[475px]:h-[350px] md:h-[475px] rounded-xl shadow-lg shadow-red-900/50"
         :src="image"
       />
     </div>
@@ -35,7 +25,7 @@
     </div>
     <h1 class="text-xl font-bold">{{ title }}</h1>
     <h2 class="text-zinc-500 font-bold">{{ title_japanese }}</h2>
-  </div>
+  </NuxtLink>
 </template>
 
 <script>

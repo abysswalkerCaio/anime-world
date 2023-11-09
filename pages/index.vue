@@ -2,7 +2,7 @@
   <main class="px-5 py-16 flex flex-col md:px-0 md:items-center">
     <div class="h-full w-full lg:w-[984px]">
       <div
-        class="flex-none h-auto w-full flex items-center justify-center text-5xl font-bold"
+        class="flex-none h-auto w-full flex items-center justify-center text-4xl font-bold"
       >
         <img src="../img/anime-world-full.png" />
       </div>
@@ -25,9 +25,8 @@
         </div>
         <div v-if="top_anime.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-2xl md:text-5xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
           >
-            <h1 class="text-transparent">Explorando mundos...</h1>
             <font-awesome-icon
               class="text-red-500 fa-spin"
               :icon="'spinner'"
@@ -70,9 +69,8 @@
         </div>
         <div v-if="top_manga.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-2xl md:text-5xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
           >
-            <h1 class="text-transparent">Buscando maravilhas...</h1>
             <font-awesome-icon
               class="text-red-500 fa-spin"
               :icon="'spinner'"
@@ -115,9 +113,8 @@
         </div>
         <div v-if="top_character.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-2xl md:text-5xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
           >
-            <h1 class="text-transparent">Desbravando lendas...</h1>
             <font-awesome-icon
               class="text-red-500 fa-spin"
               :icon="'spinner'"
@@ -160,9 +157,8 @@
         </div>
         <div v-if="top_people.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-2xl md:text-5xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
           >
-            <h1 class="text-transparent">Artistas? Só um segundo...</h1>
             <font-awesome-icon
               class="text-red-500 fa-spin"
               :icon="'spinner'"
@@ -205,7 +201,7 @@ export default {
       top_people: [],
     };
   },
-  created() {
+  mounted() {
     this.loadTopAnimes();
     this.loadTopMangas();
     setTimeout(() => {

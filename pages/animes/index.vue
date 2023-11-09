@@ -1,28 +1,31 @@
 <template>
-  <div class="px-5 py-32 flex flex-col md:px-0 md:items-center">
+  <div class="px-5 py-24 flex flex-col md:px-0 md:items-center">
     <div class="h-full w-full lg:w-[984px]">
-      <form
-        @submit.prevent="loadAnimes"
-        class="flex flex-col gap-5 items-center"
-      >
-        <div class="flex w-full shadow-lg shadow-red-900/50 h-16">
-          <input
-            class="w-full h-full px-5 bg-zinc-800 focus:outline-none rounded-l-lg"
-            type="search"
-            id="title"
-            name="title"
-            autocomplete="off"
-            placeholder="Procure por um anime..."
+      <div class="flex items-center text-lg">
+        <button
+          class="flex items-center gap-2 text-red-500 transition duration-300 ease-in-out hover:text-red-300 cursor-pointer"
+          @click="$router.back()"
+        >
+          <font-awesome-icon :icon="'fa-arrow-left'" />
+          Voltar
+        </button>
+      </div>
+      <form @submit.prevent="loadAnimes" class="mt-10 flex flex-col gap-5">
+        <div class="flex items-center-center gap-5 w-full">
+          <v-text-field
             v-model="search"
+            class="w-full"
+            label="Pesquise por um anime..."
+            variant="filled"
           />
           <button
             type="submit"
-            class="bg-zinc-800 transition ease-in-out duration-300 hover:text-red-500 hover:bg-zinc-950 text-lg h-full w-16 rounded-r-lg"
+            class="bg-zinc-800 h-14 transition ease-in-out duration-300 hover:text-red-500 hover:bg-zinc-950 text-lg w-16 rounded-lg"
           >
             <font-awesome-icon :icon="'fa-search'" />
           </button>
         </div>
-        <div class="flex flex-col w-full h-16 gap-2">
+        <div class="flex flex-col w-full gap-2">
           <div class="flex gap-3">
             <v-select
               v-model="filter.type"
@@ -55,11 +58,46 @@
             >
             </v-select>
           </div>
+          <div class="flex gap-3">
+            <v-select
+              v-model="filter.genre"
+              :items="genre_options"
+              label="Selecione um gênero..."
+              variant="solo"
+              :clearable="true"
+            >
+            </v-select>
+          </div>
         </div>
       </form>
-      <!-- Aqui -->
       <div
-        class="mt-48 grid gap-5 grid-cols-1 min-[460px]:grid-cols-2 md:grid-cols-3"
+        class="mt-5 mb-10 text-center md:text-lg"
+        v-if="anime.length > 0 && !loading"
+      >
+        Encontrados
+        <span class="font-bold">{{ anime_total.total }}</span> animes em
+        <span class="font-bold">{{ anime_pagination.last_visible_page }}</span>
+        páginas.
+      </div>
+      <div
+        v-else-if="anime.length < 1 && !loading"
+        class="mt-5 mb-10 text-center md:text-lg"
+      >
+        Nenhum resultado encontrado.
+      </div>
+      <div class="mt-5" v-if="loading">
+        <div
+          class="flex flex-col gap-5 justify-center items-center w-full text-4xl font-bold"
+        >
+          <font-awesome-icon
+            class="text-red-500 fa-spin"
+            :icon="'spinner'"
+          ></font-awesome-icon>
+        </div>
+      </div>
+      <div
+        v-else
+        class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
       >
         <div v-for="animes in anime">
           <AnimesAnimeCard
@@ -72,7 +110,7 @@
           />
         </div>
       </div>
-      <div v-if="anime.length > 0" class="text-center">
+      <div v-if="anime.length > 0 && !loading" class="text-center">
         <v-container>
           <v-row justify="center">
             <v-col cols="8">
@@ -96,6 +134,7 @@
 export default {
   data() {
     return {
+      loading: true,
       search: "",
       filter: {
         type: null,
@@ -103,6 +142,7 @@ export default {
         rating: null,
         sfw: null,
         genre: null,
+        producer: null,
       },
       type_options: [
         {
@@ -184,10 +224,11 @@ export default {
           value: null,
         },
         {
-          title: "Somente SFW",
+          title: "SFW",
           value: "&sfw=true",
         },
       ],
+      genre_options: [],
       genre: [],
       anime: [],
       anime_pagination: [],
@@ -196,6 +237,8 @@ export default {
     };
   },
   async mounted() {
+    this.loading = true;
+
     const anime_data = await $fetch(
       `https://api.jikan.moe/v4/anime?page=${this.anime_page}&limit=24`
     );
@@ -203,10 +246,22 @@ export default {
 
     this.anime = anime_data.data;
     this.anime_pagination = anime_data.pagination;
+    this.anime_total = this.anime_pagination.items;
     this.genre = genre_data.data;
+
+    this.genre_options = this.genre.map((item) => {
+      return {
+        title: item.name,
+        value: "&genres=" + item.mal_id,
+      };
+    });
+
+    this.loading = false;
   },
   methods: {
     async loadAnimes() {
+      this.loading = true;
+
       const filters = [
         this.filter.type,
         this.filter.status,
@@ -226,6 +281,9 @@ export default {
       const data = await $fetch(animeUrl);
       this.anime = data.data;
       this.anime_pagination = data.pagination;
+      this.anime_total = this.anime_pagination.items;
+
+      this.loading = false;
     },
   },
 };
