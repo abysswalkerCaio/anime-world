@@ -11,7 +11,7 @@
         </NuxtLink>
       </div>
       <form @submit.prevent="loadAnimes" class="mt-10 flex flex-col gap-5">
-        <div class="flex items-center gap-5 w-full">
+        <div class="flex gap-5 w-full">
           <v-text-field
             v-model="search"
             class="w-full"
@@ -51,15 +51,6 @@
             >
             </v-select>
             <v-select
-              v-model="filter.sfw"
-              :items="sfw_options"
-              label="Selecione uma classificação..."
-              variant="solo"
-            >
-            </v-select>
-          </div>
-          <div class="flex gap-3">
-            <v-select
               v-model="filter.genre"
               :items="genre_options"
               label="Selecione um gênero..."
@@ -74,11 +65,10 @@
         class="mt-5 mb-10 text-center md:text-lg"
         v-if="anime.length > 0 && !loading"
       >
-        Encontrados
         <span class="font-bold">{{ anime_total.total }}</span> animes em
         <span class="font-bold">{{ anime_pagination.last_visible_page }}</span>
-        <div v-if="anime_pagination.last_visible_page == 1">página.</div>
-        <div v-else>páginas.</div>
+        <span v-if="anime_pagination.last_visible_page == 1"> página.</span>
+        <span v-else> páginas.</span>
       </div>
       <div
         v-else-if="anime.length < 1 && !loading"
@@ -103,6 +93,10 @@
         <div v-for="animes in anime">
           <AnimesAnimeCard
             :id="animes.mal_id"
+            :score="animes.score"
+            :scored_by="animes.scored_by"
+            :episode="animes.episodes"
+            :duration="animes.duration"
             :image="animes.images.jpg.large_image_url"
             :title="animes.title"
             :title_japanese="animes.title_japanese"
@@ -111,7 +105,12 @@
           />
         </div>
       </div>
-      <div v-if="anime.length > 0 && !loading" class="text-center">
+      <div
+        v-if="
+          anime.length > 0 && !loading && anime_pagination.last_visible_page > 1
+        "
+        class="text-center"
+      >
         <v-container>
           <v-row justify="center">
             <v-col cols="8">
@@ -142,7 +141,6 @@ export default {
         type: null,
         status: null,
         rating: null,
-        sfw: null,
         genre: null,
         producer: null,
       },
@@ -150,7 +148,6 @@ export default {
         type: null,
         status: null,
         rating: null,
-        sfw: null,
         genre: null,
         producer: null,
       },
@@ -228,16 +225,6 @@ export default {
           value: "&rating=rx",
         },
       ],
-      sfw_options: [
-        {
-          title: "SFW e NSFW",
-          value: null,
-        },
-        {
-          title: "SFW",
-          value: "&sfw=true",
-        },
-      ],
       genre_options: [],
       genre: [],
       anime: [],
@@ -276,7 +263,6 @@ export default {
         this.filter.type,
         this.filter.status,
         this.filter.rating,
-        this.filter.sfw,
         this.filter.genre,
       ];
 
@@ -284,21 +270,24 @@ export default {
         this.filter_old.type,
         this.filter_old.status,
         this.filter_old.rating,
-        this.filter_old.sfw,
         this.filter_old.genre,
       ];
 
-      if (JSON.stringify(filters_old) !== JSON.stringify(filters)) {
+      if (
+        JSON.stringify(filters_old) !== JSON.stringify(filters) &&
+        this.anime_page != 1
+      ) {
         this.filter_old.type = filters[0];
         this.filter_old.status = filters[1];
         this.filter_old.rating = filters[2];
-        this.filter_old.sfw = filters[3];
-        this.filter_old.genre = filters[4];
+        this.filter_old.genre = filters[3];
 
         this.anime_page = 1;
-      } else if (this.search_old !== this.search) {
+      }
+
+      if (this.search_old !== this.search && this.anime_page != 1) {
         this.anime_page = 1;
-        this.search_old = this.search
+        this.search_old = this.search;
       }
 
       let animeUrl = `https://api.jikan.moe/v4/anime?page=${this.anime_page}&limit=24&q=${this.search}`;

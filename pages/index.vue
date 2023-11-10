@@ -40,6 +40,10 @@
           <div v-for="animes in top_anime">
             <AnimesAnimeCard
               :id="animes.mal_id"
+              :score="animes.score"
+              :scored_by="animes.scored_by"
+              :episode="animes.episodes"
+              :duration="animes.duration"
               :image="animes.images.jpg.large_image_url"
               :title="animes.title"
               :title_japanese="animes.title_japanese"
