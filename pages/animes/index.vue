@@ -2,16 +2,16 @@
   <div class="px-5 py-24 flex flex-col md:px-0 md:items-center">
     <div class="h-full w-full lg:w-[984px]">
       <div class="flex items-center text-lg">
-        <button
+        <NuxtLink
           class="flex items-center gap-2 text-red-500 transition duration-300 ease-in-out hover:text-red-300 cursor-pointer"
-          @click="$router.back()"
+          to="/"
         >
           <font-awesome-icon :icon="'fa-arrow-left'" />
           Voltar
-        </button>
+        </NuxtLink>
       </div>
       <form @submit.prevent="loadAnimes" class="mt-10 flex flex-col gap-5">
-        <div class="flex items-center-center gap-5 w-full">
+        <div class="flex items-center gap-5 w-full">
           <v-text-field
             v-model="search"
             class="w-full"
@@ -77,7 +77,8 @@
         Encontrados
         <span class="font-bold">{{ anime_total.total }}</span> animes em
         <span class="font-bold">{{ anime_pagination.last_visible_page }}</span>
-        páginas.
+        <div v-if="anime_pagination.last_visible_page == 1">página.</div>
+        <div v-else>páginas.</div>
       </div>
       <div
         v-else-if="anime.length < 1 && !loading"
@@ -136,7 +137,16 @@ export default {
     return {
       loading: true,
       search: "",
+      search_old: "",
       filter: {
+        type: null,
+        status: null,
+        rating: null,
+        sfw: null,
+        genre: null,
+        producer: null,
+      },
+      filter_old: {
         type: null,
         status: null,
         rating: null,
@@ -269,6 +279,27 @@ export default {
         this.filter.sfw,
         this.filter.genre,
       ];
+
+      const filters_old = [
+        this.filter_old.type,
+        this.filter_old.status,
+        this.filter_old.rating,
+        this.filter_old.sfw,
+        this.filter_old.genre,
+      ];
+
+      if (JSON.stringify(filters_old) !== JSON.stringify(filters)) {
+        this.filter_old.type = filters[0];
+        this.filter_old.status = filters[1];
+        this.filter_old.rating = filters[2];
+        this.filter_old.sfw = filters[3];
+        this.filter_old.genre = filters[4];
+
+        this.anime_page = 1;
+      } else if (this.search_old !== this.search) {
+        this.anime_page = 1;
+        this.search_old = this.search
+      }
 
       let animeUrl = `https://api.jikan.moe/v4/anime?page=${this.anime_page}&limit=24&q=${this.search}`;
 
