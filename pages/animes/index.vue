@@ -13,7 +13,7 @@
       <form @submit.prevent="loadAnimes" class="mt-10 flex flex-col gap-5">
         <div class="flex gap-5 w-full">
           <v-text-field
-            v-model="search"
+            v-model="filter.search"
             class="w-full"
             label="Pesquise por um anime..."
             variant="filled"
@@ -135,9 +135,8 @@ export default {
   data() {
     return {
       loading: true,
-      search: "",
-      search_old: "",
       filter: {
+        search: "",
         type: null,
         status: null,
         rating: null,
@@ -145,6 +144,7 @@ export default {
         producer: null,
       },
       filter_old: {
+        search: "",
         type: null,
         status: null,
         rating: null,
@@ -237,7 +237,7 @@ export default {
     this.loading = true;
 
     const anime_data = await $fetch(
-      `https://api.jikan.moe/v4/anime?page=${this.anime_page}&limit=24`
+      `https://api.jikan.moe/v4/anime?page=${this.anime_page}&limit=24&q=`
     );
     const genre_data = await $fetch("https://api.jikan.moe/v4/genres/anime");
 
@@ -260,6 +260,7 @@ export default {
       this.loading = true;
 
       const filters = [
+        this.filter.search,
         this.filter.type,
         this.filter.status,
         this.filter.rating,
@@ -267,30 +268,23 @@ export default {
       ];
 
       const filters_old = [
+        this.filter_old.search,
         this.filter_old.type,
         this.filter_old.status,
         this.filter_old.rating,
         this.filter_old.genre,
       ];
 
-      if (
-        JSON.stringify(filters_old) !== JSON.stringify(filters) &&
-        this.anime_page != 1
-      ) {
-        this.filter_old.type = filters[0];
-        this.filter_old.status = filters[1];
-        this.filter_old.rating = filters[2];
-        this.filter_old.genre = filters[3];
+      if (JSON.stringify(filters_old) !== JSON.stringify(filters)) {
+        this.filter_old.search = filters[0]
+        this.filter_old.type = filters[1];
+        this.filter_old.status = filters[2];
+        this.filter_old.rating = filters[3];
+        this.filter_old.genre = filters[4];
 
         this.anime_page = 1;
       }
-
-      if (this.search_old !== this.search && this.anime_page != 1) {
-        this.anime_page = 1;
-        this.search_old = this.search;
-      }
-
-      let animeUrl = `https://api.jikan.moe/v4/anime?page=${this.anime_page}&limit=24&q=${this.search}`;
+      let animeUrl = `https://api.jikan.moe/v4/anime?page=${this.anime_page}&limit=24&q=`;
 
       for (let i = 0; i < filters.length; i++) {
         if (filters[i] != null) {
