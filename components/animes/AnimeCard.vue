@@ -2,7 +2,7 @@
   <NuxtLink :to="`/animes/${id}`" class="flex flex-col relative group">
     <div class="flex flex-col">
       <div
-        class="absolute break-words top-0 left-0 right-0 h-full bg-zinc-950 p-2 font-bold opacity-0 group-hover:opacity-90 duration-300"
+        class="absolute break-words top-0 left-0 right-0 h-full bg-black p-2 font-bold opacity-0 group-hover:opacity-90 duration-300"
       >
         <div class="mt-5 flex flex-col gap-2 w-full">
           <span>{{ title }}</span>
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     formatReviews(review) {
-      return Intl.NumberFormat().format(review);
+      return review;
     },
   },
 };

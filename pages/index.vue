@@ -7,20 +7,62 @@
         <img src="../img/anime-world-full.png" />
       </div>
 
-      <!-- Top Animes -->
-      <div class="mt-10">
+      <!-- Top Season Now -->
+      <div class="mt-12">
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
-          <h1 class="ml-2 md:text-xl font-bold">TOP 3 ANIMES</h1>
+          <h1 class="ml-2 md:text-xl font-bold">TEMPORADA ATUAL</h1>
+          <NuxtLink
+            to="/seasons"
+            class="font-semibold text-sm md:text-base transition ease-in-out duration-300 hover:text-red-500"
+            >TEMPORADAS
+            <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
+          </NuxtLink>
+        </div>
+        <div v-if="season_now.length < 1">
+          <div
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+          >
+            <font-awesome-icon
+              class="text-red-500 fa-spin"
+              :icon="'spinner'"
+            ></font-awesome-icon>
+          </div>
+        </div>
+        <div
+          v-else
+          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+        >
+          <div v-for="animes in season_now">
+            <AnimesAnimeCard
+              :id="animes.mal_id"
+              :score="animes.score"
+              :scored_by="animes.scored_by"
+              :episode="animes.episodes"
+              :duration="animes.duration"
+              :image="animes.images.jpg.large_image_url"
+              :title="animes.title"
+              :title_japanese="animes.title_japanese"
+              :genre="animes.genres"
+              :synopsis="animes.synopsis"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Fim Season Now -->
+
+      <!-- Top Animes -->
+      <div class="mt-12">
+        <div
+          class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
+        >
+          <h1 class="ml-2 md:text-xl font-bold">TOP ANIMES</h1>
           <NuxtLink
             to="/animes"
-            class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
-            >VER TODOS
-            <font-awesome-icon
-              class="text-xs md:text-sm"
-              :icon="'arrow-right'"
-            ></font-awesome-icon>
+            class="font-semibold text-sm md:text-base transition ease-in-out duration-300 hover:text-red-500"
+            >ANIMES
+            <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
           </NuxtLink>
         </div>
         <div v-if="top_anime.length < 1">
@@ -56,19 +98,16 @@
       <!-- Fim Top Animes -->
 
       <!-- Top Mangás -->
-      <div class="mt-10">
+      <div class="mt-12">
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
-          <h1 class="ml-2 md:text-xl font-bold">TOP 3 MANGÁS</h1>
+          <h1 class="ml-2 md:text-xl font-bold">TOP MANGÁS</h1>
           <NuxtLink
             to="/mangas"
-            class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
-            >VER TODOS
-            <font-awesome-icon
-              class="text-xs md:text-sm"
-              :icon="'arrow-right'"
-            ></font-awesome-icon>
+            class="font-semibold text-sm md:text-base transition ease-in-out duration-300 hover:text-red-500"
+            >MANGÁS
+            <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
           </NuxtLink>
         </div>
         <div v-if="top_manga.length < 1">
@@ -100,19 +139,16 @@
       <!-- Fim Top Mangás -->
 
       <!-- Top Characters -->
-      <div class="mt-10">
+      <div class="mt-12">
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
-          <h1 class="ml-2 md:text-xl font-bold">TOP 3 PERSONAGENS</h1>
+          <h1 class="ml-2 md:text-xl font-bold">TOP PERSONAGENS</h1>
           <NuxtLink
             to="/characters"
-            class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
-            >VER TODOS
-            <font-awesome-icon
-              class="text-xs md:text-sm"
-              :icon="'arrow-right'"
-            ></font-awesome-icon>
+            class="font-semibold text-sm md:text-base transition ease-in-out duration-300 hover:text-red-500"
+            >PERSONAGENS
+            <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
           </NuxtLink>
         </div>
         <div v-if="top_character.length < 1">
@@ -144,19 +180,16 @@
       <!-- Fim Top Personagens -->
 
       <!-- Top Artistas -->
-      <div class="mt-10">
+      <div class="mt-12">
         <div
           class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
         >
-          <h1 class="ml-2 md:text-xl font-bold">TOP 3 ARTISTAS</h1>
+          <h1 class="ml-2 md:text-xl font-bold">TOP ARTISTAS</h1>
           <NuxtLink
             to="/people"
-            class="font-semibold transition ease-in-out duration-300 hover:text-red-500"
-            >VER TODOS
-            <font-awesome-icon
-              class="text-xs md:text-sm"
-              :icon="'arrow-right'"
-            ></font-awesome-icon>
+            class="font-semibold text-sm md:text-base transition ease-in-out duration-300 hover:text-red-500"
+            >ARTISTAS
+            <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
           </NuxtLink>
         </div>
         <div v-if="top_people.length < 1">
@@ -186,6 +219,47 @@
         </div>
       </div>
       <!-- Fim Top Artistas -->
+
+      <!-- Top Artistas -->
+      <div class="mt-12">
+        <div
+          class="flex items-center justify-between w-full h-10 border-l-4 border-red-500"
+        >
+          <h1 class="ml-2 md:text-xl font-bold">ESTÚDIOS</h1>
+          <NuxtLink
+            to="/people"
+            class="font-semibold text-sm md:text-base transition ease-in-out duration-300 hover:text-red-500"
+            >ESTÚDIOS
+            <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
+          </NuxtLink>
+        </div>
+        <div v-if="producers.length < 1">
+          <div
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+          >
+            <font-awesome-icon
+              class="text-red-500 fa-spin"
+              :icon="'spinner'"
+            ></font-awesome-icon>
+          </div>
+        </div>
+        <div
+          v-else
+          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+        >
+          <div v-for="producers in producers">
+            <ProducersProducerCard
+              :id="producers.mal_id"
+              :image="producers.images.jpg.image_url"
+              :favorite="producers.favorites"
+              :count="producers.count"
+              :title="producers.titles"
+              :about="producers.about"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Fim Top Artistas -->
     </div>
   </main>
 </template>
@@ -199,44 +273,62 @@ export default {
   },
   data() {
     return {
+      season_now: [],
       top_anime: [],
       top_manga: [],
       top_character: [],
       top_people: [],
+      producers: [],
     };
   },
   mounted() {
+    this.loadSeasonNow();
     this.loadTopAnimes();
-    this.loadTopMangas();
     setTimeout(() => {
+      this.loadTopMangas();
       this.loadTopCharacters();
-      this.loadTopPeople();
     }, "3000");
+    setTimeout(() => {
+      this.loadTopPeople();
+      this.loadProducers();
+    }, "6000");
   },
   methods: {
+    async loadSeasonNow() {
+      const data = await $fetch(
+        "https://api.jikan.moe/v4/seasons/now?limit=6"
+      ).catch((error) => error.data);
+      this.season_now = data.data;
+    },
     async loadTopAnimes() {
       const data = await $fetch(
-        `https://api.jikan.moe/v4/top/anime?limit=3`
+        "https://api.jikan.moe/v4/top/anime?limit=6"
       ).catch((error) => error.data);
       this.top_anime = data.data;
     },
     async loadTopMangas() {
       const data = await $fetch(
-        "https://api.jikan.moe/v4/top/manga?limit=3"
+        "https://api.jikan.moe/v4/top/manga?limit=6"
       ).catch((error) => error.data);
       this.top_manga = data.data;
     },
     async loadTopCharacters() {
       const data = await $fetch(
-        "https://api.jikan.moe/v4/top/characters?limit=3"
+        "https://api.jikan.moe/v4/top/characters?limit=6"
       ).catch((error) => error.data);
       this.top_character = data.data;
     },
     async loadTopPeople() {
       const data = await $fetch(
-        "https://api.jikan.moe/v4/top/people?limit=3"
+        "https://api.jikan.moe/v4/top/people?limit=6"
       ).catch((error) => error.data);
       this.top_people = data.data;
+    },
+    async loadProducers() {
+      const data = await $fetch(
+        "https://api.jikan.moe/v4/producers?limit=6"
+      ).catch((error) => error.data);
+      this.producers = data.data;
     },
   },
 };

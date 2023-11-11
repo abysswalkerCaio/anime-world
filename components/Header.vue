@@ -28,9 +28,6 @@
           <NuxtLink to="/mangas" class="px-4 py-2 hover:bg-zinc-700 w-full"
             >Mangás</NuxtLink
           >
-          <NuxtLink to="/magazines" class="px-4 py-2 hover:bg-zinc-700 w-full"
-            >Revistas</NuxtLink
-          >
           <NuxtLink to="/seasons" class="px-4 py-2 hover:bg-zinc-700 w-full"
             >Temporadas</NuxtLink
           >
@@ -41,7 +38,7 @@
             >Artistas</NuxtLink
           >
           <NuxtLink to="/producers" class="px-4 py-2 hover:bg-zinc-700 w-full"
-            >Produtores</NuxtLink
+            >Estúdios</NuxtLink
           >
         </div>
       </transition>
@@ -55,9 +52,6 @@
       >
       <NuxtLink to="/mangas" class="flex items-center px-5 hover:bg-zinc-900"
         >Mangás</NuxtLink
-      >
-      <NuxtLink to="/magazines" class="flex items-center px-5 hover:bg-zinc-900"
-        >Revistas</NuxtLink
       >
       <div
         @click="menu = !menu"
@@ -96,7 +90,7 @@
             <NuxtLink
               to="/producers"
               class="px-4 py-2 hover:bg-zinc-700 w-full text-end"
-              >Produtores</NuxtLink
+              >Estúdios</NuxtLink
             >
           </div>
         </transition>

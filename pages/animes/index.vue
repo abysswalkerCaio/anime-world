@@ -3,13 +3,13 @@
     <div class="h-full w-full lg:w-[984px]">
       <div class="flex items-center text-lg">
         <NuxtLink
-          class="flex items-center gap-2 text-red-500 transition duration-300 ease-in-out hover:text-red-300 cursor-pointer"
+          class="flex items-center text-red-500 border-transparent border-2 p-3 rounded-xl transition duration-300 ease-in-out hover:text-red-300 hover:border-red-300"
           to="/"
         >
           <font-awesome-icon :icon="'fa-arrow-left'" />
-          Voltar
         </NuxtLink>
       </div>
+
       <form @submit.prevent="loadAnimes" class="mt-10 flex flex-col gap-5">
         <div class="flex gap-5 w-full">
           <v-text-field
@@ -276,7 +276,7 @@ export default {
       ];
 
       if (JSON.stringify(filters_old) !== JSON.stringify(filters)) {
-        this.filter_old.search = filters[0]
+        this.filter_old.search = filters[0];
         this.filter_old.type = filters[1];
         this.filter_old.status = filters[2];
         this.filter_old.rating = filters[3];
