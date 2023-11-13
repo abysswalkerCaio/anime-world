@@ -229,7 +229,7 @@
         >
           <h1 class="ml-2 md:text-xl font-bold">ESTÚDIOS</h1>
           <NuxtLink
-            to="/people"
+            to="/producers"
             class="font-semibold text-sm md:text-base transition ease-in-out duration-300 hover:text-red-500"
             >ESTÚDIOS
             <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
