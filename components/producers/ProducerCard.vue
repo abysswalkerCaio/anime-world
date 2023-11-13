@@ -6,13 +6,13 @@
       >
         <div class="mt-5 flex flex-col gap-2 w-full">
           <span v-if="favorite" class="flex items-center gap-1"
-            >{{ favorite }}
+            >{{ formatNumber(favorite) }}
             <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
           </span>
           <span v-else>Nada informado.</span>
           <div class="flex flex-col">
             <span v-if="count" class="text-zinc-400 text-xs"
-              >{{ count }} Titles</span
+              >{{ formatNumber(count) }} Titles</span
             >
             <span v-else class="text-zinc-400 text-xs">Nada informado.</span>
           </div>
@@ -23,7 +23,7 @@
         </div>
       </div>
       <img
-        class="object-cover w-full h-[300px] rounded-xl shadow-lg shadow-red-900/50"
+        class="object-cover w-full h-[300px] min-[360px]:h-[225px] min-[475px]:h-[325px] rounded-xl shadow-lg shadow-red-900/50"
         :src="image"
       />
     </div>
@@ -47,6 +47,12 @@ export default {
     count: Number,
     title: Array,
     about: String,
+  },
+  methods: {
+    formatNumber(number) {
+      const numberFormat = new Intl.NumberFormat("pt-BR");
+      return numberFormat.format(number);
+    },
   },
 };
 </script>

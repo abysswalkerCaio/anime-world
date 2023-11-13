@@ -65,8 +65,9 @@
         class="mt-5 mb-10 text-center md:text-lg"
         v-if="anime.length > 0 && !loading"
       >
-        <span class="font-bold">{{ anime_total.total }}</span> animes em
-        <span class="font-bold">{{ anime_pagination.last_visible_page }}</span>
+        Encontrados
+        <span class="font-bold">{{ formatSearch(anime_total.total) }}</span> animes em
+        <span class="font-bold">{{ formatSearch(anime_pagination.last_visible_page) }}</span>
         <span v-if="anime_pagination.last_visible_page == 1"> página.</span>
         <span v-else> páginas.</span>
       </div>
@@ -88,7 +89,7 @@
       </div>
       <div
         v-else
-        class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+        class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
       >
         <div v-for="animes in anime">
           <AnimesAnimeCard
@@ -256,6 +257,10 @@ export default {
     this.loading = false;
   },
   methods: {
+    formatSearch(number) {
+      const numberFormat = new Intl.NumberFormat("pt-BR");
+      return numberFormat.format(number)
+    },
     async loadAnimes() {
       this.loading = true;
 

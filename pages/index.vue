@@ -22,7 +22,7 @@
         </div>
         <div v-if="season_now.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >
             <font-awesome-icon
               class="text-red-500 fa-spin"
@@ -32,7 +32,7 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="animes in season_now">
             <AnimesAnimeCard
@@ -67,7 +67,7 @@
         </div>
         <div v-if="top_anime.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >
             <font-awesome-icon
               class="text-red-500 fa-spin"
@@ -77,7 +77,7 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="animes in top_anime">
             <AnimesAnimeCard
@@ -112,7 +112,7 @@
         </div>
         <div v-if="top_manga.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >
             <font-awesome-icon
               class="text-red-500 fa-spin"
@@ -122,7 +122,7 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="mangas in top_manga">
             <MangasMangaCard
@@ -153,7 +153,7 @@
         </div>
         <div v-if="top_character.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >
             <font-awesome-icon
               class="text-red-500 fa-spin"
@@ -163,7 +163,7 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="characters in top_character">
             <CharactersCharacterCard
@@ -172,6 +172,7 @@
               :name="characters.name"
               :name_kanji="characters.name_kanji"
               :nickname="characters.nicknames"
+              :favorite="characters.favorites"
               :about="characters.about"
             />
           </div>
@@ -194,7 +195,7 @@
         </div>
         <div v-if="top_people.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
           >
             <font-awesome-icon
               class="text-red-500 fa-spin"
@@ -204,7 +205,7 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="people in top_people">
             <PeopleCard
@@ -213,6 +214,7 @@
               :name="people.name"
               :given_name="people.given_name"
               :alternate_name="people.alternate_names"
+              :favorite="people.favorites"
               :about="people.about"
             />
           </div>
@@ -235,7 +237,7 @@
         </div>
         <div v-if="producers.length < 1">
           <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold bg-gradient-to-r from-red-500 from-50% to-slate-200 to-100% pb-4"
+            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >
             <font-awesome-icon
               class="text-red-500 fa-spin"
@@ -245,7 +247,7 @@
         </div>
         <div
           v-else
-          class="mt-5 grid gap-5 grid-cols-1 min-[475px]:grid-cols-2 md:grid-cols-3"
+          class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
         >
           <div v-for="producers in producers">
             <ProducersProducerCard
@@ -265,12 +267,7 @@
 </template>
 
 <script>
-import { VDataTable } from "vuetify/labs/VDataTable";
-
 export default {
-  components: {
-    VDataTable,
-  },
   data() {
     return {
       season_now: [],

@@ -8,14 +8,18 @@
           <span>{{ title }}</span>
           <span v-if="score && scored_by" class="flex items-center gap-1"
             >{{ score }}
-            <font-awesome-icon :icon="'fa-star'" class="text-red-500" /> /
-            {{ formatReviews(scored_by) }}
+            <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
+            ({{ formatReviews(scored_by) }})
           </span>
           <span v-else>Não avaliado.</span>
           <div class="flex flex-col">
-            <span v-if="episode" class="text-zinc-400 text-xs">{{ episode }} Episodes</span>
+            <span v-if="episode" class="text-zinc-400 text-xs"
+              >{{ episode }} Episodes</span
+            >
             <span v-else class="text-zinc-400 text-xs">Nada informado.</span>
-            <span v-if="duration" class="text-zinc-400 text-xs">{{ duration }}</span>
+            <span v-if="duration" class="text-zinc-400 text-xs">{{
+              duration
+            }}</span>
             <span v-else class="text-zinc-400 text-xs">Nada informado.</span>
           </div>
           <p v-if="synopsis" class="text-xs line-clamp-5">
@@ -25,7 +29,7 @@
         </div>
       </div>
       <img
-        class="object-cover w-full h-[300px] min-[475px]:h-[350px] md:h-[475px] rounded-xl shadow-lg shadow-red-900/50"
+        class="rounded-xl object-cover w-full h-[400px] min-[360px]:h-[325px] min-[475px]:h-[425px] shadow-lg shadow-red-900/50"
         :src="image"
       />
     </div>
@@ -59,7 +63,8 @@ export default {
   },
   methods: {
     formatReviews(review) {
-      return review;
+      const numberFormat = new Intl.NumberFormat("pt-BR");
+      return numberFormat.format(review);
     },
   },
 };

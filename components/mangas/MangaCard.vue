@@ -11,7 +11,7 @@
         </div>
       </div>
       <img
-        class="object-cover w-full h-[300px] min-[475px]:h-[350px] md:h-[475px] rounded-xl shadow-lg shadow-red-900/50"
+        class="object-cover w-full h-[400px] min-[360px]:h-[325px] min-[475px]:h-[425px] rounded-xl shadow-lg shadow-red-900/50"
         :src="image"
       />
     </div>

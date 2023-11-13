@@ -28,6 +28,7 @@ export default defineNuxtConfig({
       "@fortawesome/vue-fontawesome",
       "@fortawesome/fontawesome-svg-core",
       "@fortawesome/free-solid-svg-icons",
+      "@fortawesome/free-brands-svg-icons",
       "vuetify",
     ],
   },
