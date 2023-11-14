@@ -31,6 +31,7 @@
       <img
         class="rounded-xl object-cover w-full h-[400px] min-[360px]:h-[325px] min-[475px]:h-[425px] shadow-lg shadow-red-900/50"
         :src="image"
+        :alt="title + ' poster'"
       />
     </div>
     <div class="flex flex-wrap gap-1 my-4">

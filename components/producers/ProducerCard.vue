@@ -25,6 +25,7 @@
       <img
         class="object-cover w-full h-[300px] min-[360px]:h-[225px] min-[475px]:h-[325px] rounded-xl shadow-lg shadow-red-900/50"
         :src="image"
+        :alt="title[0] + ' logo'"
       />
     </div>
     <div class="flex flex-wrap gap-1 my-4">

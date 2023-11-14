@@ -44,7 +44,7 @@
       </transition>
     </div>
     <NuxtLink to="/" class="h-full flex items-center justify-center">
-      <img src="../img/anime-world-logo.png" />
+      <img src="../img/anime-world-logo.png" alt="Anime World logo" />
     </NuxtLink>
     <nav class="max-[767px]:hidden flex h-full">
       <NuxtLink to="/animes" class="flex items-center px-5 hover:bg-zinc-900"
@@ -105,10 +105,29 @@
         class="cursor-pointer transition ease-in-out duration-300 hover:text-red-500"
       />
       <UModal v-model="qrCodeModal">
-        <div class="p-4 flex flex-col break-words items-center justify-center">
-          <p class="sm:text-lg">Deseja acessar o site pelo seu celular?</p>
+        <UCard
+          :ui="{
+            ring: '',
+            divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+          }"
+        >
+          <template #header>
+            <div class="flex items-center justify-between">
+              <h3
+                class="text-sm min-[400px]:text-base font-semibold leading-6 text-black"
+              >
+                Deseja acessar o site pelo seu celular?
+              </h3>
+              <button
+                class="p-2 px-4 text-xl outline-none outlin transition ease-in-out duration-300 hover:text-red-500"
+                @click="qrCodeModal = false"
+              >
+                <font-awesome-icon :icon="'fa-times'" />
+              </button>
+            </div>
+          </template>
           <img src="../img/anime-world-qr-code.png" alt="Anime World QR Code" />
-        </div>
+        </UCard>
       </UModal>
     </div>
   </header>

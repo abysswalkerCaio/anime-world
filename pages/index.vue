@@ -4,7 +4,7 @@
       <div
         class="flex-none h-auto w-full flex items-center justify-center text-4xl font-bold"
       >
-        <img src="../img/anime-world-full.png" />
+        <img src="../img/anime-world-full.png" alt="Anime World banner" />
       </div>
 
       <!-- Top Season Now -->

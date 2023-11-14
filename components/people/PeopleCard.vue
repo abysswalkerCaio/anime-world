@@ -19,6 +19,7 @@
       <img
         class="object-cover w-full h-[400px] min-[360px]:h-[325px] min-[475px]:h-[425px] rounded-xl shadow-lg shadow-red-900/50"
         :src="image"
+        :alt="name + ' photo'"
       />
     </div>
     <div class="flex flex-wrap gap-1 my-4">

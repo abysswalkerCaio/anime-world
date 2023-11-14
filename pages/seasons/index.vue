@@ -18,7 +18,6 @@
               :items="year_options"
               label="Selecione um ano..."
               variant="solo"
-              :disabled="true"
             >
             </v-select>
             <v-select
@@ -26,7 +25,6 @@
               :items="season_options"
               label="Selecione uma temporada..."
               variant="solo"
-              :disabled="true"
             >
             </v-select>
             <button
@@ -145,6 +143,7 @@ export default {
           value: "fall",
         },
       ],
+      year: [],
       season: [],
       season_pagination: [],
       season_total: 0,
@@ -162,8 +161,18 @@ export default {
 
     this.season = season_data.data;
     this.season_pagination = season_data.pagination;
-    this.year_options = season_list_data.data.year;
     this.season_total = this.season_pagination.items;
+    this.year = season_list_data.data;
+
+    this.year_options = this.year.map((item) => {
+      return {
+        title: item.year,
+        value: item.year,
+      };
+    });
+
+    this.filter.year = this.year_options[0].value;
+    this.filter.season = this.season_options[0].value;
 
     this.loading = false;
   },
@@ -186,11 +195,9 @@ export default {
         this.season_page = 1;
       }
 
-      //let seasonUrl = `https://api.jikan.moe/v4/seasons/2023/${this.filter.season}?page=${this.season_page}&limit=24`;
+      let seasonUrl = `https://api.jikan.moe/v4/seasons/${this.filter.year}/${this.filter.season}?page=${this.season_page}&limit=24`;
 
-      const data = await $fetch(
-        `https://api.jikan.moe/v4/seasons/now?page=${this.season_page}&limit=24`
-      );
+      const data = await $fetch(seasonUrl);
       this.season = data.data;
       this.season_pagination = data.pagination;
       this.season_total = this.season_pagination.items;
