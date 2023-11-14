@@ -29,8 +29,14 @@
         <span class="text-xs">{{ nicknames }}</span>
       </div>
     </div>
-    <h1 class="text-xl font-bold">{{ name }}</h1>
-    <h2 class="text-zinc-500 font-bold">{{ name_kanji }}</h2>
+    <h1 class="text-xl min-[360px]:text-lg min-[475px]:text-xl font-bold">
+      {{ name }}
+    </h1>
+    <h2
+      class="text-zinc-500 font-bold min-[360px]:text-sm min-[475px]:text-base"
+    >
+      {{ name_kanji }}
+    </h2>
   </NuxtLink>
 </template>
 

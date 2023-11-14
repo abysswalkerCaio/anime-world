@@ -4,10 +4,28 @@
       <div
         class="absolute break-words w-full h-full top-0 left-0 right-0 bg-zinc-950 p-2 font-bold description-anime opacity-0 group-hover:opacity-90 duration-300"
       >
-        <div class="mt-5 w-full">
-          <p class="text-xs line-clamp-5">
+        <div class="mt-5 flex flex-col gap-2 w-full">
+          <span>{{ title }}</span>
+          <span v-if="score && scored_by" class="flex items-center gap-1"
+            >{{ score }}
+            <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
+            ({{ formatReviews(scored_by) }})
+          </span>
+          <span v-else>Não avaliado.</span>
+          <div class="flex flex-col">
+            <span v-if="chapter" class="text-zinc-400 text-xs"
+              >{{ chapter }} Chapters</span
+            >
+            <span v-else class="text-zinc-400 text-xs">Nada informado.</span>
+            <span v-if="volume" class="text-zinc-400 text-xs"
+              >{{ volume }} Volumes</span
+            >
+            <span v-else class="text-zinc-400 text-xs">Nada informado.</span>
+          </div>
+          <p v-if="synopsis" class="text-xs line-clamp-5">
             {{ synopsis }}
           </p>
+          <p v-else class="text-xs line-clamp-5">Sinopse não disponível.</p>
         </div>
       </div>
       <img
@@ -23,8 +41,14 @@
         <span class="text-xs">{{ genres.name }}</span>
       </div>
     </div>
-    <h1 class="text-xl font-bold">{{ title }}</h1>
-    <h2 class="text-zinc-500 font-bold">{{ title_japanese }}</h2>
+    <h1 class="text-xl min-[360px]:text-lg min-[475px]:text-xl font-bold">
+      {{ title }}
+    </h1>
+    <h2
+      class="text-zinc-500 font-bold min-[360px]:text-sm min-[475px]:text-base"
+    >
+      {{ title_japanese }}
+    </h2>
   </NuxtLink>
 </template>
 
@@ -34,10 +58,19 @@ export default {
     id: Number,
     image: String,
     title: String,
+    score: Number,
+    scored_by: Number,
+    chapter: Number,
+    volume: Number,
     title_japanese: String,
     genre: Array,
     synopsis: String,
   },
-  methods: {},
+  methods: {
+    formatReviews(review) {
+      const numberFormat = new Intl.NumberFormat("pt-BR");
+      return numberFormat.format(review);
+    },
+  },
 };
 </script>

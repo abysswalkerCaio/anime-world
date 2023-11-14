@@ -20,7 +20,7 @@
       <transition name="slide-fade">
         <div
           v-if="mobileMenu"
-          class="flex flex-col absolute left-0 z-10 w-60 h-fit bg-zinc-900"
+          class="flex flex-col absolute left-0 z-10 w-[172px] h-fit bg-zinc-900"
         >
           <NuxtLink to="/animes" class="px-4 py-2 hover:bg-zinc-700 w-full"
             >Animes</NuxtLink
@@ -70,7 +70,7 @@
         <transition name="slide-fade">
           <div
             v-if="menu"
-            class="flex flex-col absolute z-10 right-0 w-60 h-fit bg-zinc-900"
+            class="flex flex-col absolute z-10 right-0 w-[310.767px] h-fit bg-zinc-900"
           >
             <NuxtLink
               to="/seasons"
@@ -96,6 +96,21 @@
         </transition>
       </div>
     </nav>
+    <div
+      class="flex justify-center items-center last:ml-auto md:last:ml-0 w-[100px] h-full text-2xl"
+    >
+      <font-awesome-icon
+        @click="qrCodeModal = true"
+        :icon="'fa-qrcode'"
+        class="cursor-pointer transition ease-in-out duration-300 hover:text-red-500"
+      />
+      <UModal v-model="qrCodeModal">
+        <div class="p-4 flex flex-col break-words items-center justify-center">
+          <p class="sm:text-lg">Deseja acessar o site pelo seu celular?</p>
+          <img src="../img/anime-world-qr-code.png" alt="Anime World QR Code" />
+        </div>
+      </UModal>
+    </div>
   </header>
 </template>
 
@@ -105,6 +120,7 @@ export default {
     return {
       menu: false,
       mobileMenu: false,
+      qrCodeModal: false,
     };
   },
 };

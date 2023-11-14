@@ -127,6 +127,10 @@
           <div v-for="mangas in top_manga">
             <MangasMangaCard
               :id="mangas.mal_id"
+              :score="mangas.score"
+              :scored_by="mangas.scored_by"
+              :chapter="mangas.chapters"
+              :volume="mangas.volumes"
               :image="mangas.images.jpg.large_image_url"
               :title="mangas.title"
               :title_japanese="mangas.title_japanese"

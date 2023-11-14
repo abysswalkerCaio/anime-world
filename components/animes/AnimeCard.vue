@@ -41,8 +41,14 @@
         <span class="text-xs">{{ genres.name }}</span>
       </div>
     </div>
-    <h1 class="text-xl font-bold">{{ title }}</h1>
-    <h2 class="text-zinc-500 font-bold">{{ title_japanese }}</h2>
+    <h1 class="text-xl min-[360px]:text-lg min-[475px]:text-xl font-bold">
+      {{ title }}
+    </h1>
+    <h2
+      class="text-zinc-500 font-bold min-[360px]:text-sm min-[475px]:text-base"
+    >
+      {{ title_japanese }}
+    </h2>
   </NuxtLink>
 </template>
 
