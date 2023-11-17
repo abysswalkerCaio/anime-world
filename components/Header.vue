@@ -1,26 +1,26 @@
 <template>
   <header
-    class="bg-zinc-800 fixed w-full h-16 flex items-center z-10 gap-2 md:justify-around md:px-5 select-none"
+    class="bg-zinc-900 fixed w-full h-16 flex items-center z-10 gap-2 md:justify-around md:px-5 select-none"
   >
     <div
       @click="mobileMenu = !mobileMenu"
-      :class="{ 'bg-zinc-900': mobileMenu }"
-      class="cursor-pointer h-full w-16 md:hidden inline-block px-6 hover:bg-zinc-900"
+      :class="{ 'bg-zinc-950': mobileMenu }"
+      class="cursor-pointer h-full w-16 md:hidden inline-block px-6 hover:bg-zinc-950"
     >
       <div class="relative flex items-center justify-center gap-2 h-full">
-        <transition name="fade">
+        <TransitionGroup name="mobile-menu">
           <font-awesome-icon
             v-if="!mobileMenu"
             class="text-xl absolute"
             :icon="'fa-bars'"
           />
           <font-awesome-icon v-else class="text-xl" :icon="'fa-times'" />
-        </transition>
+        </TransitionGroup>
       </div>
-      <transition name="slide-fade">
+      <TransitionGroup name="navigation">
         <div
           v-if="mobileMenu"
-          class="flex flex-col absolute left-0 z-10 w-[172px] h-fit bg-zinc-900"
+          class="flex flex-col absolute left-0 z-10 w-[172px] h-fit bg-zinc-950"
         >
           <NuxtLink to="/animes" class="px-4 py-2 hover:bg-zinc-700 w-full"
             >Animes</NuxtLink
@@ -41,22 +41,22 @@
             >Estúdios</NuxtLink
           >
         </div>
-      </transition>
+      </TransitionGroup>
     </div>
     <NuxtLink to="/" class="h-full flex items-center justify-center">
       <img src="../img/anime-world-logo.png" alt="Anime World logo" />
     </NuxtLink>
     <nav class="max-[767px]:hidden flex h-full">
-      <NuxtLink to="/animes" class="flex items-center px-5 hover:bg-zinc-900"
+      <NuxtLink to="/animes" class="flex items-center px-5 hover:bg-zinc-950"
         >Animes</NuxtLink
       >
-      <NuxtLink to="/mangas" class="flex items-center px-5 hover:bg-zinc-900"
+      <NuxtLink to="/mangas" class="flex items-center px-5 hover:bg-zinc-950"
         >Mangás</NuxtLink
       >
       <div
         @click="menu = !menu"
-        :class="{ 'bg-zinc-900': menu }"
-        class="relative cursor-pointer inline-block px-5 hover:bg-zinc-900 group"
+        :class="{ 'bg-zinc-950': menu }"
+        class="relative cursor-pointer inline-block px-5 hover:bg-zinc-950 group"
       >
         <div class="flex relative items-center gap-2 h-full">
           Navegar
@@ -67,10 +67,10 @@
           />
           <font-awesome-icon v-else class="text-xs" :icon="'fa-chevron-up'" />
         </div>
-        <transition name="slide-fade">
+        <TransitionGroup name="menu">
           <div
             v-if="menu"
-            class="flex flex-col absolute z-10 right-0 w-[310.767px] h-fit bg-zinc-900"
+            class="flex flex-col absolute z-10 right-0 w-[310.767px] h-fit bg-zinc-950"
           >
             <NuxtLink
               to="/seasons"
@@ -93,7 +93,7 @@
               >Estúdios</NuxtLink
             >
           </div>
-        </transition>
+        </TransitionGroup>
       </div>
     </nav>
     <div
@@ -146,27 +146,41 @@ export default {
 </script>
 
 <style>
-.slide-fade-enter-active {
+.menu-enter-active {
   transition: all 0.3s ease-out;
 }
 
-.slide-fade-leave-active {
+.menu-leave-active {
   transition: all 0.3s ease-in;
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
+.menu-enter-from,
+.menu-leave-to {
   transform: translateY(20px);
   opacity: 0;
 }
 
-.fade-enter-active,
-.fade-leave-active {
+.navigation-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.navigation-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.navigation-enter-from,
+.navigation-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
   transition: transform 0.3s ease-in-out;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
   transform: rotate(-180deg);
   opacity: 0;
 }

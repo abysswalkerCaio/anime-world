@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-zinc-800 py-5 flex-col">
+  <footer class="bg-zinc-900 py-5 flex-col">
     <div class="flex justify-center gap-4">
       <NuxtLink
         class="text-3xl transition ease-in-out duration-300 hover:text-red-500"
