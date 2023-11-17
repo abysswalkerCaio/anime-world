@@ -89,22 +89,22 @@
               <div>
                 <span class="font-bold text-red-200">Externo</span>
                 <div v-for="external in full_anime.external">
-                  <NuxtLink
-                    :to="external.url"
+                  <a
+                    :href="external.url"
                     target="_blank"
                     class="transition ease-out duration-300 hover:text-red-500 text-sm"
-                    >{{ external.name }}</NuxtLink
+                    >{{ external.name }}</a
                   >
                 </div>
               </div>
               <div>
                 <span class="font-bold text-red-200">Streaming</span>
                 <div v-for="streaming in full_anime.streaming">
-                  <NuxtLink
-                    :to="streaming.url"
+                  <a
+                    :href="streaming.url"
                     target="_blank"
                     class="transition ease-out duration-300 hover:text-red-500 text-sm"
-                    >{{ streaming.name }}</NuxtLink
+                    >{{ streaming.name }}</a
                   >
                 </div>
               </div>
@@ -136,59 +136,51 @@
         </div>
         <p class="text-sm text-zinc-300">{{ full_anime.background }}</p>
         <div
-          class="flex justify-between border-b-[1px] border-b-red-500 font-bold pb-1 mt-4"
+          class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
         >
-          <h1 class="text-xl md:text-2xl">Episódios</h1>
+          <h1 class="text-xl md:text-2xl font-bold">Episódios</h1>
           <div
-            @click="episodesMenu = !episodesMenu"
-            class="flex justify-center items-center gap-1 cursor-pointer select-none transition ease-in-out duration-300 hover:text-red-500"
+            class="text-sm md:text-base flex justify-center items-center"
+            v-if="episodes.length > 0"
           >
-            <span class="text-sm">VER TODOS</span>
-            <font-awesome-icon
-              v-if="episodesMenu"
-              :icon="'chevron-left'"
-              class="text-xs"
-            />
-            <font-awesome-icon v-else :icon="'chevron-right'" class="text-xs" />
+            <p>
+              <span class="font-bold">{{
+                formatSearch(episodes_pagination.last_visible_page)
+              }}</span>
+              seções de episódios.
+            </p>
           </div>
         </div>
         <TransitionGroup name="episodes">
           <div
-            v-if="episodesMenu && episodes.length > 0"
-            v-for="episode in episodes"
+            v-if="episodes.length > 0"
+            class="h-96 overflow-y-scroll"
           >
-            <div
-              class="bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100%"
-            >
-              <NuxtLink
-                :to="episode.url"
-                target="_blank"
-                class="flex gap-5 py-2 px-5"
+            <div v-for="episode in episodes">
+              <div
+                class="bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100%"
               >
-                <div class="text-red-500 w-10">
-                  <div class="flex items-center justify-center h-full">
-                    <span class="px-2 text-xl font-bold">{{
-                      episode.mal_id
-                    }}</span>
+                <a
+                  :href="episode.url"
+                  target="_blank"
+                  class="flex gap-5 py-2 px-5"
+                >
+                  <div class="text-red-500 w-10">
+                    <div class="flex items-center justify-center h-full">
+                      <span class="px-2 text-xl font-bold">{{
+                        episode.mal_id
+                      }}</span>
+                    </div>
                   </div>
-                </div>
-                <div class="flex flex-col">
-                  <h1>{{ episode.title }}</h1>
-                  <h2 class="text-zinc-400">{{ episode.title_japanese }}</h2>
-                </div>
-              </NuxtLink>
+                  <div class="flex flex-col">
+                    <h1>{{ episode.title }}</h1>
+                    <h2 class="text-zinc-400">{{ episode.title_japanese }}</h2>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </TransitionGroup>
-        <div v-if="!episodesMenu && episodes.length > 0">
-          <div class="bg-zinc-950 p-2 text-center">
-            Encontrados
-            <span class="font-bold">{{
-              formatSearch(episodes_pagination.last_visible_page)
-            }}</span>
-            páginas de episódios.
-          </div>
-        </div>
         <div v-if="episodes.length < 1">
           <div
             class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
@@ -217,7 +209,6 @@ export default {
       episodes: [],
       episodes_pagination: [],
       episodes_total: 0,
-      episodesMenu: false,
     };
   },
   async mounted() {
@@ -246,7 +237,7 @@ export default {
     },
     async loadAnimeEpisodes(id) {
       const data = await $fetch(
-        `https://api.jikan.moe/v4/anime/${id}/episodes?limit=10`
+        `https://api.jikan.moe/v4/anime/${id}/episodes`
       );
       this.episodes = data.data;
       this.episodes_pagination = data.pagination;
