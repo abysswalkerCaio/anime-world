@@ -153,15 +153,8 @@ export default {
   async mounted() {
     this.loading = true;
 
-    const season_data = await $fetch(
-      `https://api.jikan.moe/v4/seasons/now?page=${this.season_page}&limit=24`
-    );
-
     const season_list_data = await $fetch("https://api.jikan.moe/v4/seasons");
 
-    this.season = season_data.data;
-    this.season_pagination = season_data.pagination;
-    this.season_total = this.season_pagination.items;
     this.year = season_list_data.data;
 
     this.year_options = this.year.map((item) => {
@@ -173,6 +166,14 @@ export default {
 
     this.filter.year = this.year_options[0].value;
     this.filter.season = this.season_options[0].value;
+
+    const season_data = await $fetch(
+      `https://api.jikan.moe/v4/seasons/${this.filter.year}/${this.filter.season}?page=${this.season_page}&limit=24`
+    );
+
+    this.season = season_data.data;
+    this.season_pagination = season_data.pagination;
+    this.season_total = this.season_pagination.items;
 
     this.loading = false;
   },

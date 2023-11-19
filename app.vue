@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative bg-black text-white grid grid-rows-[1fr_120px] min-h-screen"
+    class="relative general-font bg-black text-white grid grid-rows-[1fr_120px] min-h-screen"
   >
     <Header></Header>
     <NuxtPage />
@@ -16,6 +16,12 @@ theme.global.name.value = "dark";
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+.general-font {
+  font-family: 'Lato', sans-serif;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

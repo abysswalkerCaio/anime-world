@@ -10,13 +10,17 @@
         </NuxtLink>
       </div>
       <TransitionGroup name="episodes">
-        <div v-if="episodes.length > 0" class="mt-10 flex flex-col gap-3">
+        <div
+          v-if="episodes.length > 0 && !loading"
+          class="mt-10 flex flex-col gap-3"
+        >
+          <h1 class="text-xl md:text-2xl mb-5 font-bold">Lista de episódios</h1>
           <div v-for="episode in episodes">
             <div
               class="bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100%"
             >
               <a
-                :href="episode.url"
+                :href="episode.forum_url"
                 target="_blank"
                 class="flex gap-5 py-2 px-5"
               >
@@ -36,7 +40,7 @@
           </div>
         </div>
       </TransitionGroup>
-      <div v-if="episodes.length < 1">
+      <div v-if="loading">
         <div
           class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
         >
@@ -45,6 +49,12 @@
             :icon="'spinner'"
           ></font-awesome-icon>
         </div>
+      </div>
+      <div
+        v-else-if="episodes.length < 1 && !loading"
+        class="mt-5 mb-10 text-center md:text-lg"
+      >
+        Nenhum resultado encontrado.
       </div>
       <div
         v-if="
@@ -86,7 +96,7 @@ export default {
       episodes: [],
       episodes_pagination: [],
       episodes_page: 1,
-      loading: false,
+      loading: true,
     };
   },
   mounted() {
@@ -101,6 +111,8 @@ export default {
       );
       this.episodes = data.data;
       this.episodes_pagination = data.pagination;
+
+      this.loading = false;
     },
   },
 };
