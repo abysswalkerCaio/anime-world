@@ -18,17 +18,19 @@
           >
             <div class="text-lg md:text-xl flex flex-col text-center">
               <h3>Nota</h3>
-              <p>
+              <div v-if="full_anime.score">
                 <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
                 {{ full_anime.score }}
-              </p>
+              </div>
+              <span v-else>N/A</span>
             </div>
             <div class="text-lg md:text-xl flex flex-col text-center">
               <h3 class="text-center">Ranking</h3>
-              <p>
+              <div v-if="full_anime.popularity">
                 <span class="text-red-500 font-bold">#</span>
                 {{ full_anime.popularity }}
-              </p>
+              </div>
+              <span v-else>N/A</span>
             </div>
           </div>
           <div
@@ -42,7 +44,10 @@
               </div>
               <div>
                 <span class="font-bold text-red-200">Transmissão</span>
-                <div class="text-sm">{{ full_anime.broadcast.string }}</div>
+                <div v-if="full_anime.broadcast.string" class="text-sm">
+                  {{ full_anime.broadcast.string }}
+                </div>
+                <span v-else>Nada informado.</span>
               </div>
               <div>
                 <span class="font-bold text-red-200">Produtores</span>
@@ -112,135 +117,75 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 w-full">
         <div class="border-b-[1px] border-b-red-500 pb-1 font-bold">
           <h1 class="text-xl md:text-2xl">{{ full_anime.title }}</h1>
           <h2 class="text-sm md:text-base text-zinc-500">
             {{ full_anime.title_japanese }}
           </h2>
         </div>
-        <span class="text-sm text-zinc-300"
-          >{{ full_anime.episodes }} Episodes / {{ full_anime.duration }} /
-          {{ full_anime.status }}</span
-        >
+        <div class="text-sm text-zinc-300">
+          <span v-if="full_anime.episodes"
+            >{{ full_anime.episodes }} Episodes</span
+          >
+          <span v-else>Não informado.</span>
+          / <span v-if="full_anime.duration">{{ full_anime.duration }}</span>
+          <span v-else>Nada informado</span> /
+          <span v-if="full_anime.status">{{ full_anime.status }}</span>
+          <span v-else>Nada informado.</span>
+        </div>
         <div
           class="text-xl md:text-2xl border-b-[1px] border-b-red-500 font-bold pb-1 mt-4"
         >
           Sinopse
         </div>
-        <p class="text-sm text-zinc-300">{{ full_anime.synopsis }}</p>
+        <p v-if="full_anime.synopsis" class="text-sm text-zinc-300">
+          {{ full_anime.synopsis }}
+        </p>
+        <span v-else class="text-sm text-zinc-300">Nada informado.</span>
         <div
           class="text-xl md:text-2xl border-b-[1px] border-b-red-500 font-bold pb-1 mt-4"
         >
           Background
         </div>
-        <p class="text-sm text-zinc-300">{{ full_anime.background }}</p>
+        <p v-if="full_anime.background" class="text-sm text-zinc-300">
+          {{ full_anime.background }}
+        </p>
+        <span v-else>Nada informado.</span>
         <div
           class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
         >
           <h1 class="text-xl md:text-2xl font-bold">Episódios</h1>
-          <div
-            class="text-sm md:text-base flex justify-center items-center"
-            v-if="episodes.length > 0"
-          >
-            <p>
-              <span class="font-bold">{{
-                formatSearch(episodes_pagination.last_visible_page)
-              }}</span>
-              seções de episódios.
-            </p>
-          </div>
         </div>
-        <TransitionGroup name="episodes">
-          <div
-            v-if="episodes.length > 0"
-            class="h-96 overflow-y-scroll"
-          >
-            <div v-for="episode in episodes">
-              <div
-                class="bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100%"
-              >
-                <a
-                  :href="episode.url"
-                  target="_blank"
-                  class="flex gap-5 py-2 px-5"
-                >
-                  <div class="text-red-500 w-10">
-                    <div class="flex items-center justify-center h-full">
-                      <span class="px-2 text-xl font-bold">{{
-                        episode.mal_id
-                      }}</span>
-                    </div>
-                  </div>
-                  <div class="flex flex-col">
-                    <h1>{{ episode.title }}</h1>
-                    <h2 class="text-zinc-400">{{ episode.title_japanese }}</h2>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </TransitionGroup>
-        <div v-if="episodes.length < 1">
-          <div
-            class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
-          >
-            <font-awesome-icon
-              class="text-red-500 fa-spin"
-              :icon="'spinner'"
-            ></font-awesome-icon>
-          </div>
-        </div>
+        <NuxtLink
+          :to="`episodes/${anime_id}`"
+          class="flex items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold gap-2 transition ease-in-out duration-300 hover:text-red-500"
+        >
+          VER TODOS
+          <font-awesome-icon :icon="'fa-arrow-right'" />
+        </NuxtLink>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { TransitionGroup } from "vue";
-
 export default {
-  components: { TransitionGroup },
   data() {
     return {
       anime: [],
-      character: [],
-      staff: [],
-      episodes: [],
-      episodes_pagination: [],
-      episodes_total: 0,
+      anime_id: "",
     };
   },
   async mounted() {
     const { id } = useRoute().params;
+    this.anime_id = id;
     this.loadAnime(id);
-    this.loadAnimeCharacters(id);
-    setTimeout(() => {
-      this.loadAnimeStaff(id);
-      this.loadAnimeEpisodes(id);
-    }, "3000");
   },
   methods: {
     async loadAnime(id) {
       const data = await $fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
       this.anime = data;
-    },
-    async loadAnimeCharacters(id) {
-      const data = await $fetch(
-        `https://api.jikan.moe/v4/anime/${id}/characters`
-      );
-      this.character = data;
-    },
-    async loadAnimeStaff(id) {
-      const data = await $fetch(`https://api.jikan.moe/v4/anime/${id}/staff`);
-      this.staff = data;
-    },
-    async loadAnimeEpisodes(id) {
-      const data = await $fetch(
-        `https://api.jikan.moe/v4/anime/${id}/episodes`
-      );
-      this.episodes = data.data;
-      this.episodes_pagination = data.pagination;
     },
     formatSearch(number) {
       const numberFormat = new Intl.NumberFormat("pt-BR");
@@ -249,19 +194,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.episodes-enter-active {
-  transition: all 0.4s ease-out;
-}
-
-.episodes-leave-active {
-  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.episodes-enter-from,
-.episodes-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-</style>
