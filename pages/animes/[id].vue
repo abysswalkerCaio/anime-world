@@ -231,6 +231,18 @@
             VER TODOS
             <font-awesome-icon :icon="'fa-arrow-right'" />
           </NuxtLink>
+          <div
+            class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
+          >
+            <h1 class="text-xl md:text-2xl font-bold">Staff</h1>
+          </div>
+          <NuxtLink
+            :to="`staff/${anime_id}`"
+            class="flex items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold gap-2 transition ease-in-out duration-300 hover:text-red-500"
+          >
+            VER TODOS
+            <font-awesome-icon :icon="'fa-arrow-right'" />
+          </NuxtLink>
         </div>
       </div>
     </div>
