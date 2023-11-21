@@ -71,7 +71,7 @@
                   <div v-if="full_anime.broadcast.string" class="text-sm">
                     {{ full_anime.broadcast.string }}
                   </div>
-                  <div v-else>Nada informado.</div>
+                  <div v-else class="text-sm">Nada informado.</div>
                 </div>
                 <div>
                   <span class="font-bold text-red-200">Produtores</span>
@@ -260,13 +260,22 @@
               >
                 <h2 class="text-lg md:text-xl">{{ relations.relation }}</h2>
                 <div v-for="entry in relations.entry">
-                  <a
-                    :href="entry.url"
+                  <NuxtLink
+                    v-if="entry.type === 'anime'"
+                    :to="`/animes/${entry.mal_id}`"
                     class="flex flex-col justify-between bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100% text-sm md:text-base p-4"
                   >
                     <h1>{{ entry.name }}</h1>
-                    <h2 class="text-zinc-400">{{ entry.type }}</h2>
-                  </a>
+                    <h2 class="text-zinc-400">Anime</h2>
+                  </NuxtLink>
+                  <NuxtLink
+                    v-if="entry.type === 'manga'"
+                    :to="`/mangas/${entry.mal_id}`"
+                    class="flex flex-col justify-between bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100% text-sm md:text-base p-4"
+                  >
+                    <h1>{{ entry.name }}</h1>
+                    <h2 class="text-zinc-400">Manga</h2>
+                  </NuxtLink>
                 </div>
               </div>
             </div>

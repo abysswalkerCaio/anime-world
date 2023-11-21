@@ -44,7 +44,7 @@
                 <h3>Favoritos</h3>
                 <div v-if="full_character.favorites">
                   <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
-                  {{ full_character.favorites }}
+                  {{ formatSearch(full_character.favorites) }}
                 </div>
                 <span v-else>N/A</span>
               </div>
@@ -64,7 +64,7 @@
                     v-if="full_character.nicknames.length > 0"
                     v-for="nicknames in full_character.nicknames"
                   >
-                    <span class="ext-sm">{{ nicknames }}</span>
+                    <span class="text-sm">{{ nicknames }}</span>
                   </div>
                   <div v-else class="text-sm">Nada informado.</div>
                 </div>
@@ -75,13 +75,12 @@
                     v-for="anime in full_character.anime"
                     class="flex flex-col gap-2"
                   >
-                    <div v-for="anime_data in anime">
-                      <NuxtLink
-                        :to="`/animes/${anime_data.mal_id}`"
-                        class="transition ease-out duration-300 hover:text-red-500 text-sm"
-                        >{{ anime_data.title }}</NuxtLink
-                      >
-                    </div>
+                    <NuxtLink
+                      v-for="anime_data in anime"
+                      :to="`/animes/${anime_data.mal_id}`"
+                      class="transition ease-out duration-300 hover:text-red-500 text-sm h-full w-fit"
+                      >{{ anime_data.title }}</NuxtLink
+                    >
                   </div>
                   <div v-else class="text-sm">Nada informado.</div>
                 </div>
@@ -92,13 +91,12 @@
                     v-for="manga in full_character.manga"
                     class="flex flex-col gap-2"
                   >
-                    <div v-for="manga_data in manga">
-                      <NuxtLink
-                        :to="`/mangas/${manga_data.mal_id}`"
-                        class="transition ease-out duration-300 hover:text-red-500 text-sm"
-                        >{{ manga_data.title }}</NuxtLink
-                      >
-                    </div>
+                    <NuxtLink
+                      v-for="manga_data in manga"
+                      :to="`/mangas/${manga_data.mal_id}`"
+                      class="transition ease-out duration-300 hover:text-red-500 text-sm w-fit"
+                      >{{ manga_data.title }}</NuxtLink
+                    >
                   </div>
                   <div v-else class="text-sm">Nada informado.</div>
                 </div>
@@ -106,15 +104,17 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col w-full font-bold">
-          <h1 class="text-xl md:text-2xl">{{ full_character.name }}</h1>
-          <h2 class="text-sm md:text-base text-zinc-500">
-            {{ full_character.name_kanji }}
-          </h2>
+        <div class="flex flex-col gap-2 w-full">
+          <div class="font-bold">
+            <h1 class="text-xl md:text-2xl">{{ full_character.name }}</h1>
+            <h2 class="text-sm md:text-base text-zinc-500">
+              {{ full_character.name_kanji }}
+            </h2>
+          </div>
           <div
             class="text-xl md:text-2xl border-b-[1px] border-b-red-500 font-bold pb-1 mt-4"
           >
-            Sinopse
+            Sobre
           </div>
           <p
             v-if="full_character.about"
@@ -123,6 +123,47 @@
             {{ full_character.about }}
           </p>
           <span v-else class="text-sm text-zinc-300">Nada informado.</span>
+          <div
+            class="text-xl md:text-2xl border-b-[1px] border-b-red-500 font-bold pb-1 mt-4"
+          >
+            Dubladores
+          </div>
+          <TransitionGroup name="characters">
+            <div v-if="full_character.voices" class="flex flex-col gap-3">
+              <div v-for="voices in full_character.voices">
+                <div
+                  class="bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100%"
+                >
+                  <NuxtLink
+                    :to="`/people/${voices.person.mal_id}`"
+                    class="flex gap-4"
+                  >
+                    <div class="w-28 min-h-[175px] h-auto flex-none">
+                      <img
+                        :src="voices.person.images.jpg.image_url"
+                        :alt="voices.person.name + ' photo'"
+                        class="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div class="flex flex-col py-2 justify-between">
+                      <h1 class="text-lg md:text-xl mb-2">
+                        {{ voices.person.name }}
+                      </h1>
+                      <h2 class="text-zinc-400 md:text-lg">
+                        {{ voices.language }}
+                      </h2>
+                    </div>
+                  </NuxtLink>
+                </div>
+              </div>
+            </div>
+          </TransitionGroup>
+          <div
+            v-if="!full_character.voices"
+            class="mt-5 mb-10 text-center md:text-lg"
+          >
+            Nenhum resultado encontrado.
+          </div>
         </div>
       </div>
     </div>
@@ -156,3 +197,19 @@ export default {
   },
 };
 </script>
+
+<style>
+.characters-enter-active {
+  transition: all 0.4s ease-out;
+}
+
+.characters-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.characters-enter-from,
+.characters-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>
