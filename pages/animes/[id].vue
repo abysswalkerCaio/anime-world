@@ -210,39 +210,82 @@
           <div
             class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
           >
-            <h1 class="text-xl md:text-2xl font-bold">Episódios</h1>
+            <h1 class="text-xl md:text-2xl font-bold">Principal</h1>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <NuxtLink
+              :to="`episodes/${anime_id}`"
+              class="flex flex-1 items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
+            >
+              Episódios
+            </NuxtLink>
+            <NuxtLink
+              :to="`characters/${anime_id}`"
+              class="flex flex-1 items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
+            >
+              Personagens
+            </NuxtLink>
+            <NuxtLink
+              :to="`staff/${anime_id}`"
+              class="flex flex-1 items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
+            >
+              Staff
+            </NuxtLink>
+          </div>
+          <div
+            class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
+          >
+            <h1 class="text-xl md:text-2xl font-bold">Temas</h1>
           </div>
           <NuxtLink
-            :to="`episodes/${anime_id}`"
-            class="flex items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold gap-2 transition ease-in-out duration-300 hover:text-red-500"
+            :to="`themes/${anime_id}`"
+            class="p-2 bg-zinc-950 flex justify-center items-center gap-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
           >
-            VER TODOS
+            <span>VER TODOS</span>
             <font-awesome-icon :icon="'fa-arrow-right'" />
           </NuxtLink>
           <div
             class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
           >
-            <h1 class="text-xl md:text-2xl font-bold">Pesonagens</h1>
+            <h1 class="text-xl md:text-2xl font-bold">Relações</h1>
           </div>
-          <NuxtLink
-            :to="`characters/${anime_id}`"
-            class="flex items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold gap-2 transition ease-in-out duration-300 hover:text-red-500"
-          >
-            VER TODOS
-            <font-awesome-icon :icon="'fa-arrow-right'" />
-          </NuxtLink>
+          <TransitionGroup name="relations">
+            <div
+              v-if="anime_relations.length > 0 && !loading"
+              class="flex flex-col gap-3"
+            >
+              <div v-for="relations in anime_relations">
+                <div class="p-2 bg-zinc-950">
+                  <div v-for="entry in relations.entry">
+                    <div class="flex flex-col justify-between py-2 gap-2">
+                      <h1 class="text-lg md:text-xl">
+                        {{ entry.name }}
+                      </h1>
+                      <h2 class="text-zinc-400 md:text-lg">
+                        {{ relations.relation }}
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TransitionGroup>
+          <div v-if="loading">
+            <div
+              class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
+            >
+              <font-awesome-icon
+                class="text-red-500 fa-spin"
+                :icon="'spinner'"
+              ></font-awesome-icon>
+            </div>
+          </div>
           <div
-            class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
+            v-else-if="anime_relations.length < 1 && !loading"
+            class="mt-5 mb-10 text-center md:text-lg"
           >
-            <h1 class="text-xl md:text-2xl font-bold">Staff</h1>
+            Nenhum resultado encontrado.
           </div>
-          <NuxtLink
-            :to="`staff/${anime_id}`"
-            class="flex items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold gap-2 transition ease-in-out duration-300 hover:text-red-500"
-          >
-            VER TODOS
-            <font-awesome-icon :icon="'fa-arrow-right'" />
-          </NuxtLink>
         </div>
       </div>
     </div>
@@ -254,18 +297,31 @@ export default {
   data() {
     return {
       anime: [],
+      anime_relations: [],
+      anime_entry: [],
       anime_id: "",
+      loading: true,
     };
   },
   async mounted() {
-    const { id, title } = useRoute().params;
+    const { id } = useRoute().params;
     this.anime_id = id;
     this.loadAnime(id);
+    this.loadAnimeRelations(id);
   },
   methods: {
     async loadAnime(id) {
       const data = await $fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
       this.anime = data;
+    },
+    async loadAnimeRelations(id) {
+      const data = await $fetch(
+        `https://api.jikan.moe/v4/anime/${id}/relations`
+      );
+      this.anime_relations = data.data;
+      this.anime_entry = this.anime_relations.entry;
+
+      this.loading = false;
     },
     formatSearch(number) {
       const numberFormat = new Intl.NumberFormat("pt-BR");
@@ -274,3 +330,19 @@ export default {
   },
 };
 </script>
+
+<style>
+.relations-enter-active {
+  transition: all 0.4s ease-out;
+}
+
+.relations-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.relations-enter-from,
+.relations-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>

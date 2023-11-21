@@ -25,10 +25,11 @@
                 :to="`/characters/${character.character.mal_id}`"
                 class="flex gap-4"
               >
-                <div class="w-28 flex-none">
+                <div class="w-28 min-h-[175px] h-auto flex-none">
                   <img
                     :src="character.character.images.jpg.image_url"
                     :alt="character.name + ' image'"
+                    class="h-full w-full object-cover"
                   />
                 </div>
                 <div class="flex flex-col py-2 justify-between">
