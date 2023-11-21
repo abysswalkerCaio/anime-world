@@ -4,38 +4,40 @@
       <div class="flex items-center text-lg">
         <NuxtLink
           class="flex items-center text-red-500 border-transparent border-2 p-3 rounded-xl transition duration-300 ease-in-out hover:text-red-300 hover:border-red-300"
-          :to="`/animes/${anime_id}`"
+          :to="`/mangas/${manga_id}`"
         >
           <font-awesome-icon :icon="'fa-arrow-left'" />
         </NuxtLink>
       </div>
-      <TransitionGroup name="staff">
+      <TransitionGroup name="characters">
         <div
-          v-if="staff.length > 0 && !loading"
+          v-if="characters.length > 0 && !loading"
           class="mt-10 flex flex-col gap-3"
         >
-          <h1 class="text-xl md:text-2xl mb-5 font-bold">Lista da staff</h1>
-          <div v-for="staff in staff">
+          <h1 class="text-xl md:text-2xl mb-5 font-bold">
+            Lista de personagens
+          </h1>
+          <div v-for="character in characters">
             <div
               class="bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100%"
             >
               <NuxtLink
-                :to="`/people/${staff.person.mal_id}`"
+                :to="`/characters/${character.character.mal_id}`"
                 class="flex gap-4"
               >
                 <div class="w-28 min-h-[175px] h-auto flex-none">
                   <img
-                    :src="staff.person.images.jpg.image_url"
-                    :alt="staff.name + ' photo'"
+                    :src="character.character.images.jpg.image_url"
+                    :alt="character.name + ' image'"
                     class="h-full w-full object-cover"
                   />
                 </div>
                 <div class="flex flex-col py-2 justify-between">
-                  <h1 class="text-lg md:text-xl mb-2">
-                    {{ staff.person.name }}
+                  <h1 class="text-lg md:text-xl">
+                    {{ character.character.name }}
                   </h1>
                   <h2 class="text-zinc-400 md:text-lg">
-                    {{ staff.positions.join(", ") }}
+                    {{ character.role }}
                   </h2>
                 </div>
               </NuxtLink>
@@ -54,7 +56,7 @@
         </div>
       </div>
       <div
-        v-else-if="staff.length < 1 && !loading"
+        v-else-if="characters.length < 1 && !loading"
         class="mt-5 mb-10 text-center md:text-lg"
       >
         Nenhum resultado encontrado.
@@ -67,22 +69,22 @@
 export default {
   data() {
     return {
-      anime_id: "",
-      staff: [],
+      manga_id: "",
+      characters: [],
       loading: true,
     };
   },
   mounted() {
     const { id } = useRoute().params;
-    this.anime_id = id;
-    this.loadStaff(id);
+    this.manga_id = id;
+    this.loadMangaCharacters(id);
   },
   methods: {
-    async loadStaff(id) {
+    async loadMangaCharacters(id) {
       const data = await $fetch(
-        `https://api.jikan.moe/v4/anime/${this.anime_id}/staff`
+        `https://api.jikan.moe/v4/manga/${id}/characters`
       );
-      this.staff = data.data;
+      this.characters = data.data;
       this.loading = false;
     },
   },
@@ -90,16 +92,16 @@ export default {
 </script>
 
 <style>
-.staff-enter-active {
+.characters-enter-active {
   transition: all 0.4s ease-out;
 }
 
-.staff-leave-active {
+.characters-leave-active {
   transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.staff-enter-from,
-.staff-leave-to {
+.characters-enter-from,
+.characters-leave-to {
   transform: translateX(20px);
   opacity: 0;
 }

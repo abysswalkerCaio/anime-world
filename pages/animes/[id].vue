@@ -34,7 +34,7 @@
           <img
             class="rounded-xl object-cover w-full h-[400px] min-[400px]:h-[600px] min-[510px]:h-[425px] shadow-lg shadow-red-900/50"
             :src="full_anime.images.jpg.large_image_url"
-            :alt="full_anime.title"
+            :alt="full_anime.title + ' poster'"
           />
           <div class="flex flex-col gap-2 w-full">
             <div
@@ -180,9 +180,9 @@
             <span v-if="full_anime.episodes"
               >{{ full_anime.episodes }} Episodes</span
             >
-            <span v-else>Não informado.</span>
+            <span v-else>Nada informado.</span>
             / <span v-if="full_anime.duration">{{ full_anime.duration }}</span>
-            <span v-else>Nada informado</span> /
+            <span v-else>Nada informado.</span> /
             <span v-if="full_anime.status">{{ full_anime.status }}</span>
             <span v-else>Nada informado.</span>
           </div>
@@ -226,19 +226,19 @@
               Personagens
             </NuxtLink>
             <NuxtLink
-              :to="`staff/${anime_id}`"
+              :to="`themes/${anime_id}`"
               class="flex flex-1 items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
             >
-              Staff
+              Temas
             </NuxtLink>
           </div>
           <div
             class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
           >
-            <h1 class="text-xl md:text-2xl font-bold">Temas</h1>
+            <h1 class="text-xl md:text-2xl font-bold">Staff</h1>
           </div>
           <NuxtLink
-            :to="`themes/${anime_id}`"
+            :to="`staff/${anime_id}`"
             class="p-2 bg-zinc-950 flex justify-center items-center gap-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
           >
             <span>VER TODOS</span>
@@ -252,20 +252,21 @@
           <TransitionGroup name="relations">
             <div
               v-if="anime_relations.length > 0 && !loading"
-              class="flex flex-col gap-3"
+              class="flex flex-col gap-5"
             >
-              <div v-for="relations in anime_relations">
-                <div class="p-2 bg-zinc-950">
-                  <div v-for="entry in relations.entry">
-                    <div class="flex flex-col justify-between py-2 gap-2">
-                      <h1 class="text-lg md:text-xl">
-                        {{ entry.name }}
-                      </h1>
-                      <h2 class="text-zinc-400 md:text-lg">
-                        {{ relations.relation }}
-                      </h2>
-                    </div>
-                  </div>
+              <div
+                class="flex flex-col gap-2"
+                v-for="relations in anime_relations"
+              >
+                <h2 class="text-lg md:text-xl">{{ relations.relation }}</h2>
+                <div v-for="entry in relations.entry">
+                  <a
+                    :href="entry.url"
+                    class="flex flex-col justify-between bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100% text-sm md:text-base p-4"
+                  >
+                    <h1>{{ entry.name }}</h1>
+                    <h2 class="text-zinc-400">{{ entry.type }}</h2>
+                  </a>
                 </div>
               </div>
             </div>
@@ -298,7 +299,6 @@ export default {
     return {
       anime: [],
       anime_relations: [],
-      anime_entry: [],
       anime_id: "",
       loading: true,
     };
@@ -319,7 +319,6 @@ export default {
         `https://api.jikan.moe/v4/anime/${id}/relations`
       );
       this.anime_relations = data.data;
-      this.anime_entry = this.anime_relations.entry;
 
       this.loading = false;
     },

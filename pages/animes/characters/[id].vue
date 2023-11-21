@@ -82,7 +82,7 @@ export default {
   methods: {
     async loadAnimeCharacters(id) {
       const data = await $fetch(
-        `https://api.jikan.moe/v4/anime/${this.anime_id}/characters`
+        `https://api.jikan.moe/v4/anime/${id}/characters`
       );
       this.characters = data.data;
       this.loading = false;
