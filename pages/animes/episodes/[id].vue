@@ -11,7 +11,7 @@
       </div>
       <TransitionGroup name="episodes">
         <div
-          v-if="episodes.length > 0 && !loading"
+          v-if="episodes?.length > 0 && !loading"
           class="mt-10 flex flex-col gap-3"
         >
           <h1 class="text-xl md:text-2xl mb-5 font-bold">Lista de episódios</h1>
@@ -51,16 +51,16 @@
         </div>
       </div>
       <div
-        v-else-if="episodes.length < 1 && !loading"
+        v-else-if="episodes?.length < 1 && !loading"
         class="mt-5 mb-10 text-center md:text-lg"
       >
         Nenhum resultado encontrado.
       </div>
       <div
         v-if="
-          episodes.length > 0 &&
+          episodes?.length > 0 &&
           !loading &&
-          episodes_pagination.last_visible_page > 1
+          episodes_pagination?.last_visible_page > 1
         "
         class="text-center"
       >

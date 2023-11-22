@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="mt-10 px-5 flex flex-col md:flex-row md:px-0 justify-center">
-      <div v-if="character.length < 1">
+      <div v-if="character?.length < 1">
         <div
           class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
         >
@@ -42,7 +42,7 @@
             >
               <div class="text-lg md:text-xl flex flex-col text-center">
                 <h3>Favoritos</h3>
-                <div v-if="full_character.favorites">
+                <div v-if="full_character?.favorites">
                   <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
                   {{ formatSearch(full_character.favorites) }}
                 </div>
@@ -61,7 +61,7 @@
                 <div>
                   <span class="font-bold text-red-200">Apelidos</span>
                   <div
-                    v-if="full_character.nicknames.length > 0"
+                    v-if="full_character?.nicknames.length > 0"
                     v-for="nicknames in full_character.nicknames"
                   >
                     <span class="text-sm">{{ nicknames }}</span>
@@ -71,7 +71,7 @@
                 <div>
                   <span class="font-bold text-red-200">Animes</span>
                   <div
-                    v-if="full_character.anime.length > 0"
+                    v-if="full_character?.anime.length > 0"
                     v-for="anime in full_character.anime"
                     class="flex flex-col gap-2"
                   >
@@ -87,7 +87,7 @@
                 <div>
                   <span class="font-bold text-red-200">Mangás</span>
                   <div
-                    v-if="full_character.manga.length > 0"
+                    v-if="full_character?.manga.length > 0"
                     v-for="manga in full_character.manga"
                     class="flex flex-col gap-2"
                   >
@@ -117,7 +117,7 @@
             Sobre
           </div>
           <p
-            v-if="full_character.about"
+            v-if="full_character?.about"
             class="text-sm text-zinc-300 leading-6"
           >
             {{ full_character.about }}
@@ -129,7 +129,7 @@
             Dubladores
           </div>
           <TransitionGroup name="characters">
-            <div v-if="full_character.voices" class="flex flex-col gap-3">
+            <div v-if="full_character?.voices" class="flex flex-col gap-3">
               <div v-for="voices in full_character.voices">
                 <div
                   class="bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100%"
@@ -159,7 +159,7 @@
             </div>
           </TransitionGroup>
           <div
-            v-if="!full_character.voices"
+            v-if="!full_character?.voices"
             class="mt-5 mb-10 text-center md:text-lg"
           >
             Nenhum resultado encontrado.

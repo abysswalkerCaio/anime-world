@@ -28,7 +28,7 @@
       </form>
       <div
         class="mt-5 mb-10 text-center md:text-lg"
-        v-if="people.length > 0 && !loading"
+        v-if="people?.length > 0 && !loading"
       >
         Encontrados
         <span class="font-bold">{{ formatSearch(people_total.total) }}</span>
@@ -36,11 +36,11 @@
         <span class="font-bold">{{
           formatSearch(people_pagination.last_visible_page)
         }}</span>
-        <span v-if="people_pagination.last_visible_page == 1"> página.</span>
+        <span v-if="people_pagination?.last_visible_page == 1"> página.</span>
         <span v-else> páginas.</span>
       </div>
       <div
-        v-else-if="people.length < 1 && !loading"
+        v-else-if="people?.length < 1 && !loading"
         class="mt-5 mb-10 text-center md:text-lg"
       >
         Nenhum resultado encontrado.
@@ -73,9 +73,9 @@
       </div>
       <div
         v-if="
-          people.length > 0 &&
+          people?.length > 0 &&
           !loading &&
-          people_pagination.last_visible_page > 1
+          people_pagination?.last_visible_page > 1
         "
         class="text-center"
       >

@@ -28,7 +28,7 @@
       </form>
       <div
         class="mt-5 mb-10 text-center md:text-lg"
-        v-if="producer.length > 0 && !loading"
+        v-if="producer?.length > 0 && !loading"
       >
         Encontrados
         <span class="font-bold">{{ formatSearch(producer_total.total) }}</span>
@@ -36,11 +36,11 @@
         <span class="font-bold">{{
           formatSearch(producer_pagination.last_visible_page)
         }}</span>
-        <span v-if="producer_pagination.last_visible_page == 1"> página.</span>
+        <span v-if="producer_pagination?.last_visible_page == 1"> página.</span>
         <span v-else> páginas.</span>
       </div>
       <div
-        v-else-if="producer.length < 1 && !loading"
+        v-else-if="producer?.length < 1 && !loading"
         class="mt-5 mb-10 text-center md:text-lg"
       >
         Nenhum resultado encontrado.
@@ -72,9 +72,9 @@
       </div>
       <div
         v-if="
-          producer.length > 0 &&
+          producer?.length > 0 &&
           !loading &&
-          producer_pagination.last_visible_page > 1
+          producer_pagination?.last_visible_page > 1
         "
         class="text-center"
       >

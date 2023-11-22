@@ -20,7 +20,7 @@
             <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
           </NuxtLink>
         </div>
-        <div v-if="season_now.length < 1">
+        <div v-if="season_now?.length < 1">
           <div
             class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >
@@ -65,7 +65,7 @@
             <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
           </NuxtLink>
         </div>
-        <div v-if="top_anime.length < 1">
+        <div v-if="top_anime?.length < 1">
           <div
             class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >

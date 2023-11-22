@@ -38,7 +38,7 @@
       </form>
       <div
         class="mt-5 mb-10 text-center md:text-lg"
-        v-if="season.length > 0 && !loading"
+        v-if="season?.length > 0 && !loading"
       >
         Encontrados
         <span class="font-bold">{{ formatSearch(season_total.total) }}</span>
@@ -46,11 +46,11 @@
         <span class="font-bold">{{
           formatSearch(season_pagination.last_visible_page)
         }}</span>
-        <span v-if="season_pagination.last_visible_page == 1"> página.</span>
+        <span v-if="season_pagination?.last_visible_page == 1"> página.</span>
         <span v-else> páginas.</span>
       </div>
       <div
-        v-else-if="season.length < 1 && !loading"
+        v-else-if="season?.length < 1 && !loading"
         class="mt-5 mb-10 text-center md:text-lg"
       >
         Nenhum resultado encontrado.
@@ -86,9 +86,9 @@
       </div>
       <div
         v-if="
-          season.length > 0 &&
+          season?.length > 0 &&
           !loading &&
-          season_pagination.last_visible_page > 1
+          season_pagination?.last_visible_page > 1
         "
         class="text-center"
       >

@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="mt-10 px-5 flex flex-col md:flex-row md:px-0 justify-center">
-      <div v-if="manga.length < 1">
+      <div v-if="manga?.length < 1">
         <div
           class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
         >
@@ -42,7 +42,7 @@
             >
               <div class="text-lg md:text-xl flex flex-col text-center">
                 <h3>Nota</h3>
-                <div v-if="full_manga.score">
+                <div v-if="full_manga?.score">
                   <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
                   {{ full_manga.score }}
                 </div>
@@ -50,7 +50,7 @@
               </div>
               <div class="text-lg md:text-xl flex flex-col text-center">
                 <h3 class="text-center">Ranking</h3>
-                <div v-if="full_manga.popularity">
+                <div v-if="full_manga?.popularity">
                   <span class="text-red-500 font-bold">#</span>
                   {{ full_manga.popularity }}
                 </div>
@@ -69,7 +69,7 @@
                 <div>
                   <span class="font-bold text-red-200">Autores</span>
                   <div
-                    v-if="full_manga.authors.length > 0"
+                    v-if="full_manga?.authors.length > 0"
                     v-for="authors in full_manga.authors"
                   >
                     <NuxtLink
@@ -83,7 +83,7 @@
                 <div>
                   <span class="font-bold text-red-200">Serializações</span>
                   <div
-                    v-if="full_manga.serializations.length > 0"
+                    v-if="full_manga?.serializations.length > 0"
                     v-for="serializations in full_manga.serializations"
                   >
                     <a
@@ -98,7 +98,7 @@
                 <div>
                   <span class="font-bold text-red-200">Gêneros</span>
                   <div
-                    v-if="full_manga.genres.length > 0"
+                    v-if="full_manga?.genres.length > 0"
                     v-for="genres in full_manga.genres"
                   >
                     <span class="text-sm">{{ genres.name }}</span>
@@ -108,7 +108,7 @@
                 <div>
                   <span class="font-bold text-red-200">Demografias</span>
                   <div
-                    v-if="full_manga.demographics.length > 0"
+                    v-if="full_manga?.demographics.length > 0"
                     v-for="demographics in full_manga.demographics"
                   >
                     <span class="text-sm">{{ demographics.name }}</span>
@@ -118,7 +118,7 @@
                 <div>
                   <span class="font-bold text-red-200">Externo</span>
                   <div
-                    v-if="full_manga.external.length > 0"
+                    v-if="full_manga?.external.length > 0"
                     v-for="external in full_manga.external"
                   >
                     <a
@@ -142,16 +142,16 @@
             </h2>
           </div>
           <div class="text-sm text-zinc-300">
-            <span v-if="full_manga.chapters"
+            <span v-if="full_manga?.chapters"
               >{{ full_manga.chapters }} Chapters</span
             >
             <span v-else>Nada informado.</span>
             /
-            <span v-if="full_manga.volumes"
+            <span v-if="full_manga?.volumes"
               >{{ full_manga.volumes }} Volumes</span
             >
             <span v-else>Nada informado.</span> /
-            <span v-if="full_manga.status">{{ full_manga.status }}</span>
+            <span v-if="full_manga?.status">{{ full_manga.status }}</span>
             <span v-else>Nada informado.</span>
           </div>
           <div
@@ -159,7 +159,7 @@
           >
             Sinopse
           </div>
-          <p v-if="full_manga.synopsis" class="text-sm text-zinc-300 leading-6">
+          <p v-if="full_manga?.synopsis" class="text-sm text-zinc-300 leading-6">
             {{ full_manga.synopsis }}
           </p>
           <span v-else class="text-sm text-zinc-300">Nada informado.</span>
@@ -169,7 +169,7 @@
             Background
           </div>
           <p
-            v-if="full_manga.background"
+            v-if="full_manga?.background"
             class="text-sm text-zinc-300 leading-6"
           >
             {{ full_manga.background }}
@@ -195,7 +195,7 @@
           </div>
           <TransitionGroup name="mangas">
             <div
-              v-if="manga_relations.length > 0 && !loading"
+              v-if="manga_relations?.length > 0 && !loading"
               class="flex flex-col gap-5"
             >
               <div
@@ -205,7 +205,7 @@
                 <h2 class="text-lg md:text-xl">{{ relations.relation }}</h2>
                 <div v-for="entry in relations.entry">
                   <NuxtLink
-                    v-if="entry.type === 'anime'"
+                    v-if="entry?.type === 'anime'"
                     :to="`/animes/${entry.mal_id}`"
                     class="flex flex-col justify-between bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100% text-sm md:text-base p-4"
                   >
@@ -213,7 +213,7 @@
                     <h2 class="text-zinc-400">Anime</h2>
                   </NuxtLink>
                   <NuxtLink
-                    v-if="entry.type === 'manga'"
+                    v-if="entry?.type === 'manga'"
                     :to="`/mangas/${entry.mal_id}`"
                     class="flex flex-col justify-between bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100% text-sm md:text-base p-4"
                   >

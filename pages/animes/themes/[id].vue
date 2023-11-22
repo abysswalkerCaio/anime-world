@@ -42,7 +42,7 @@
         </div>
       </div>
       <div
-        v-else-if="themes.length < 1 && !loading"
+        v-else-if="themes?.length < 1 && !loading"
         class="mt-5 mb-10 text-center md:text-lg"
       >
         Nenhum resultado encontrado.

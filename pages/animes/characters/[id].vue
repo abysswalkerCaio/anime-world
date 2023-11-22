@@ -11,7 +11,7 @@
       </div>
       <TransitionGroup name="characters">
         <div
-          v-if="characters.length > 0 && !loading"
+          v-if="characters?.length > 0 && !loading"
           class="mt-10 flex flex-col gap-3"
         >
           <h1 class="text-xl md:text-2xl mb-5 font-bold">

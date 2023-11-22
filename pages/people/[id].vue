@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="mt-10 px-5 flex flex-col md:flex-row md:px-0 justify-center">
-      <div v-if="people.length < 1">
+      <div v-if="people?.length < 1">
         <div
           class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
         >
@@ -42,7 +42,7 @@
             >
               <div class="text-lg md:text-xl flex flex-col text-center">
                 <h3>Favoritos</h3>
-                <div v-if="full_people.favorites">
+                <div v-if="full_people?.favorites">
                   <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
                   {{ formatSearch(full_people.favorites) }}
                 </div>
@@ -60,37 +60,35 @@
                 </div>
                 <div>
                   <span class="font-bold text-red-200">Nome dado</span>
-                  <div
-                    v-if="full_people.family_name.length > 0"
-                    v-for="given_name in full_people.given_name"
-                  >
-                    <span class="text-sm">{{ given_name }}</span>
+                  <div v-if="full_people?.family_name.length > 0">
+                    <span class="text-sm">{{ full_people.given_name }}</span>
                   </div>
                   <div v-else class="text-sm">Nada informado.</div>
                 </div>
                 <div>
                   <span class="font-bold text-red-200">Nome familiar</span>
-                  <div
-                    v-if="full_people.family_name.length > 0"
-                    v-for="family_name in full_people.family_name"
-                  >
-                    <span class="text-sm">{{ family_name }}</span>
+                  <div v-if="full_people?.family_name.length > 0">
+                    <span class="text-sm">{{ full_people.family_name }}</span>
                   </div>
                   <div v-else class="text-sm">Nada informado.</div>
                 </div>
                 <div>
                   <span class="font-bold text-red-200">Nomes alternativos</span>
                   <div
-                    v-if="full_people.alternate_names.length > 0"
+                    v-if="full_people?.alternate_names.length > 0"
                     v-for="alternate_names in full_people.alternate_names"
                     class="flex flex-col gap-2"
                   >
                     <span class="text-sm">{{ alternate_names }}</span>
-                    
                   </div>
                   <div v-else class="text-sm">Nada informado.</div>
                 </div>
+                <span class="font-bold text-red-200">Data de nascimento</span>
               </div>
+              <div v-if="full_people?.birthday" class="text-sm">
+                {{ formatBirthday(full_people.birthday) }}
+              </div>
+              <div v-else class="text-sm">Nada informado.</div>
             </div>
           </div>
         </div>
@@ -106,10 +104,35 @@
           >
             Sobre
           </div>
-          <p v-if="full_people.about" class="text-sm text-zinc-300 leading-6">
+          <p v-if="full_people?.about" class="text-sm text-zinc-300 leading-6">
             {{ full_people.about }}
           </p>
           <span v-else class="text-sm text-zinc-300">Nada informado.</span>
+          <div
+            class="flex justify-between border-b-[1px] border-b-red-500 pb-1 mt-4"
+          >
+            <h1 class="text-xl md:text-2xl font-bold">Principal</h1>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <NuxtLink
+              :to="`voices/${people_id}`"
+              class="flex flex-1 items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
+            >
+              Dublagens
+            </NuxtLink>
+            <NuxtLink
+              :to="`animes/${people_id}`"
+              class="flex flex-1 items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
+            >
+              Animes
+            </NuxtLink>
+            <NuxtLink
+              :to="`mangas/${people_id}`"
+              class="flex flex-1 items-center justify-center bg-zinc-950 rounded-lg p-2 text-lg md:text-xl font-bold transition ease-in-out duration-300 hover:text-red-500"
+            >
+              Mangás
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -137,6 +160,13 @@ export default {
     formatSearch(number) {
       const numberFormat = new Intl.NumberFormat("pt-BR");
       return numberFormat.format(number);
+    },
+    formatBirthday(birthday) {
+      const birthdayDay = birthday.slice(8, 10);
+      const birthdayMonth = birthday.slice(5, 7);
+      const birthdayYear = birthday.slice(0, 4);
+
+      return `${birthdayDay}/${birthdayMonth}/${birthdayYear}`;
     },
   },
 };

@@ -13,13 +13,20 @@ import { useTheme } from "vuetify";
 
 const theme = useTheme();
 theme.global.name.value = "dark";
+
+useHead({
+  bodyAttrs: {
+    class:
+      "scrollbar scrollbar-thumb-red-500 scrollbar-track-zinc-950 scrollbar-w-2",
+  },
+});
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 .general-font {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .page-enter-active,

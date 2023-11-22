@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="mt-10 px-5 flex flex-col md:flex-row md:px-0 justify-center">
-      <div v-if="anime.length < 1">
+      <div v-if="anime?.length < 1">
         <div
           class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl pb-4"
         >
@@ -42,7 +42,7 @@
             >
               <div class="text-lg md:text-xl flex flex-col text-center">
                 <h3>Nota</h3>
-                <div v-if="full_anime.score">
+                <div v-if="full_anime?.score">
                   <font-awesome-icon :icon="'fa-star'" class="text-red-500" />
                   {{ full_anime.score }}
                 </div>
@@ -50,7 +50,7 @@
               </div>
               <div class="text-lg md:text-xl flex flex-col text-center">
                 <h3 class="text-center">Ranking</h3>
-                <div v-if="full_anime.popularity">
+                <div v-if="full_anime?.popularity">
                   <span class="text-red-500 font-bold">#</span>
                   {{ full_anime.popularity }}
                 </div>
@@ -58,7 +58,7 @@
               </div>
             </div>
             <div
-              class="flex-col gap-2 justify-around p-2 rounded-lg bg-zinc-950 break-words min-[510px]:overflow-y-auto min-[510px]:h-[353px] md:h-fit"
+              class="flex-col gap-2 justify-around p-2 rounded-lg bg-zinc-950 break-words scrollbar scrollbar-thumb-red-500 scrollbar-w-2 min-[510px]:overflow-y-auto min-[510px]:h-[353px] md:h-fit"
             >
               <div class="flex flex-col gap-4">
                 <div
@@ -68,7 +68,7 @@
                 </div>
                 <div>
                   <span class="font-bold text-red-200">Transmissão</span>
-                  <div v-if="full_anime.broadcast.string" class="text-sm">
+                  <div v-if="full_anime?.broadcast.string" class="text-sm">
                     {{ full_anime.broadcast.string }}
                   </div>
                   <div v-else class="text-sm">Nada informado.</div>
@@ -76,7 +76,7 @@
                 <div>
                   <span class="font-bold text-red-200">Produtores</span>
                   <div
-                    v-if="full_anime.producers.length > 0"
+                    v-if="full_anime?.producers.length > 0"
                     v-for="producers in full_anime.producers"
                   >
                     <NuxtLink
@@ -90,7 +90,7 @@
                 <div>
                   <span class="font-bold text-red-200">Licenciantes</span>
                   <div
-                    v-if="full_anime.licensors.length > 0"
+                    v-if="full_anime?.licensors.length > 0"
                     v-for="licensors in full_anime.licensors"
                   >
                     <NuxtLink
@@ -104,7 +104,7 @@
                 <div>
                   <span class="font-bold text-red-200">Estúdios</span>
                   <div
-                    v-if="full_anime.studios.length > 0"
+                    v-if="full_anime?.studios.length > 0"
                     v-for="studios in full_anime.studios"
                   >
                     <NuxtLink
@@ -118,7 +118,7 @@
                 <div>
                   <span class="font-bold text-red-200">Gêneros</span>
                   <div
-                    v-if="full_anime.genres.length > 0"
+                    v-if="full_anime?.genres.length > 0"
                     v-for="genres in full_anime.genres"
                   >
                     <span class="text-sm">{{ genres.name }}</span>
@@ -128,7 +128,7 @@
                 <div>
                   <span class="font-bold text-red-200">Demografias</span>
                   <div
-                    v-if="full_anime.demographics.length > 0"
+                    v-if="full_anime?.demographics.length > 0"
                     v-for="demographics in full_anime.demographics"
                   >
                     <span class="text-sm">{{ demographics.name }}</span>
@@ -138,7 +138,7 @@
                 <div>
                   <span class="font-bold text-red-200">Externo</span>
                   <div
-                    v-if="full_anime.external.length > 0"
+                    v-if="full_anime?.external.length > 0"
                     v-for="external in full_anime.external"
                   >
                     <a
@@ -153,7 +153,7 @@
                 <div>
                   <span class="font-bold text-red-200">Streaming</span>
                   <div
-                    v-if="full_anime.streaming.length > 0"
+                    v-if="full_anime?.streaming.length > 0"
                     v-for="streaming in full_anime.streaming"
                   >
                     <a
@@ -177,13 +177,13 @@
             </h2>
           </div>
           <div class="text-sm text-zinc-300">
-            <span v-if="full_anime.episodes"
+            <span v-if="full_anime?.episodes"
               >{{ full_anime.episodes }} Episodes</span
             >
             <span v-else>Nada informado.</span>
-            / <span v-if="full_anime.duration">{{ full_anime.duration }}</span>
+            / <span v-if="full_anime?.duration">{{ full_anime.duration }}</span>
             <span v-else>Nada informado.</span> /
-            <span v-if="full_anime.status">{{ full_anime.status }}</span>
+            <span v-if="full_anime?.status">{{ full_anime.status }}</span>
             <span v-else>Nada informado.</span>
           </div>
           <div
@@ -191,7 +191,7 @@
           >
             Sinopse
           </div>
-          <p v-if="full_anime.synopsis" class="text-sm text-zinc-300 leading-6">
+          <p v-if="full_anime?.synopsis" class="text-sm text-zinc-300 leading-6">
             {{ full_anime.synopsis }}
           </p>
           <span v-else class="text-sm text-zinc-300">Nada informado.</span>
@@ -201,7 +201,7 @@
             Background
           </div>
           <p
-            v-if="full_anime.background"
+            v-if="full_anime?.background"
             class="text-sm text-zinc-300 leading-6"
           >
             {{ full_anime.background }}
@@ -251,7 +251,7 @@
           </div>
           <TransitionGroup name="relations">
             <div
-              v-if="anime_relations.length > 0 && !loading"
+              v-if="anime_relations?.length > 0 && !loading"
               class="flex flex-col gap-5"
             >
               <div
@@ -261,7 +261,7 @@
                 <h2 class="text-lg md:text-xl">{{ relations.relation }}</h2>
                 <div v-for="entry in relations.entry">
                   <NuxtLink
-                    v-if="entry.type === 'anime'"
+                    v-if="entry?.type === 'anime'"
                     :to="`/animes/${entry.mal_id}`"
                     class="flex flex-col justify-between bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100% text-sm md:text-base p-4"
                   >
@@ -269,7 +269,7 @@
                     <h2 class="text-zinc-400">Anime</h2>
                   </NuxtLink>
                   <NuxtLink
-                    v-if="entry.type === 'manga'"
+                    v-if="entry?.type === 'manga'"
                     :to="`/mangas/${entry.mal_id}`"
                     class="flex flex-col justify-between bg-zinc-950 bg-gradient-to-r from-zinc-950 from-10% via-zinc-950 hover:to-red-500 to-100% text-sm md:text-base p-4"
                   >

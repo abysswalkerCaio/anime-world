@@ -56,7 +56,7 @@
       </form>
       <div
         class="mt-5 mb-10 text-center md:text-lg"
-        v-if="manga.length > 0 && !loading"
+        v-if="manga?.length > 0 && !loading"
       >
         Encontrados
         <span class="font-bold">{{ formatSearch(manga_total.total) }}</span>
@@ -64,7 +64,7 @@
         <span class="font-bold">{{
           formatSearch(manga_pagination.last_visible_page)
         }}</span>
-        <span v-if="manga_pagination.last_visible_page == 1"> página.</span>
+        <span v-if="manga_pagination?.last_visible_page == 1"> página.</span>
         <span v-else> páginas.</span>
       </div>
       <div
@@ -104,7 +104,7 @@
       </div>
       <div
         v-if="
-          manga.length > 0 && !loading && manga_pagination.last_visible_page > 1
+          manga?.length > 0 && !loading && manga_pagination?.last_visible_page > 1
         "
         class="text-center"
       >
