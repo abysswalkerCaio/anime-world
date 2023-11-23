@@ -181,7 +181,8 @@
               >{{ full_anime.episodes }} Episodes</span
             >
             <span v-else>Nada informado.</span>
-            / <span v-if="full_anime?.duration">{{ full_anime.duration }}</span>
+            /
+            <span v-if="full_anime?.duration">{{ full_anime.duration }}</span>
             <span v-else>Nada informado.</span> /
             <span v-if="full_anime?.status">{{ full_anime.status }}</span>
             <span v-else>Nada informado.</span>
@@ -191,7 +192,10 @@
           >
             Sinopse
           </div>
-          <p v-if="full_anime?.synopsis" class="text-sm text-zinc-300 leading-6">
+          <p
+            v-if="full_anime?.synopsis"
+            class="text-sm text-zinc-300 leading-6"
+          >
             {{ full_anime.synopsis }}
           </p>
           <span v-else class="text-sm text-zinc-300">Nada informado.</span>

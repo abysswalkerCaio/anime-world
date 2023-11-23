@@ -50,7 +50,7 @@
               </div>
             </div>
             <div
-              class="flex-col gap-2 justify-around p-2 rounded-lg bg-zinc-950 break-words min-[510px]:overflow-y-auto min-[510px]:h-[353px] md:h-fit"
+              class="flex-col gap-2 justify-around p-2 rounded-lg bg-zinc-950 break-words scrollbar scrollbar-thumb-red-500 scrollbar-w-2 min-[510px]:overflow-y-auto min-[510px]:h-[353px] md:h-fit"
             >
               <div class="flex flex-col gap-4">
                 <div

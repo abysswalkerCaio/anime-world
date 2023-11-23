@@ -106,6 +106,8 @@ export default {
   },
   methods: {
     async loadAnimeEpisodes(id) {
+      window.scrollTo(0, 0)
+      
       const data = await $fetch(
         `https://api.jikan.moe/v4/anime/${this.anime_id}/episodes?page=${this.episodes_page}`
       );

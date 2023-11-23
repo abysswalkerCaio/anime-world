@@ -50,20 +50,13 @@
               </div>
             </div>
             <div
-              class="flex-col gap-2 justify-around p-2 rounded-lg bg-zinc-950 break-words min-[510px]:overflow-y-auto min-[510px]:h-[353px] md:h-fit"
+              class="flex-col gap-2 justify-around p-2 rounded-lg bg-zinc-950 break-words scrollbar scrollbar-thumb-red-500 scrollbar-w-2 min-[510px]:overflow-y-auto min-[510px]:h-[353px] md:h-fit"
             >
               <div class="flex flex-col gap-4">
                 <div
                   class="border-b-[1px] border-b-red-500 pb-1 gap-2 font-bold text-lg"
                 >
                   Informações
-                </div>
-                <div>
-                  <span class="font-bold text-red-200">Nome dado</span>
-                  <div v-if="full_people?.family_name.length > 0">
-                    <span class="text-sm">{{ full_people.given_name }}</span>
-                  </div>
-                  <div v-else class="text-sm">Nada informado.</div>
                 </div>
                 <div>
                   <span class="font-bold text-red-200">Nome familiar</span>

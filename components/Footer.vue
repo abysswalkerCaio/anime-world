@@ -1,27 +1,27 @@
 <template>
   <footer class="bg-zinc-900 py-5 flex-col">
     <div class="flex justify-center gap-4">
-      <NuxtLink
+      <a
         class="text-3xl transition ease-in-out duration-300 hover:text-red-500"
-        to="https://www.instagram.com/abysswalkercaio/"
+        href="https://www.instagram.com/abysswalkercaio/"
         target="_blank"
       >
         <font-awesome-icon :icon="'fa-brands fa-instagram'" />
-      </NuxtLink>
-      <NuxtLink
+      </a>
+      <a
         class="text-3xl transition ease-in-out duration-300 hover:text-red-500"
-        to="https://br.pinterest.com/abysswalkerCaio/"
+        href="https://br.pinterest.com/abysswalkerCaio/"
         target="_blank"
       >
         <font-awesome-icon :icon="'fa-brands fa-pinterest'" />
-      </NuxtLink>
-      <NuxtLink
+      </a>
+      <a
         class="text-3xl transition ease-in-out duration-300 hover:text-red-500"
-        to="https://github.com/abysswalkerCaio"
+        href="https://github.com/abysswalkerCaio"
         target="_blank"
       >
         <font-awesome-icon :icon="'fa-brands fa-github'" />
-      </NuxtLink>
+      </a>
     </div>
     <span class="flex justify-center mt-4 opacity-60">@ 2023 Caio Costa</span>
   </footer>
