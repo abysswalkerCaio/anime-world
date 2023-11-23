@@ -32,7 +32,7 @@
           class="flex flex-col flex-none gap-2 min-[510px]:flex-row md:flex-col md:w-[300px]"
         >
           <img
-            class="rounded-xl object-cover w-full h-[300px] min-[400px]:h-[400px] min-[510px]:h-[325px] shadow-lg shadow-red-900/50"
+            class="rounded-xl object-cover w-full h-[300px] min-[400px]:h-[400px] min-[510px]:h-[325px] min-[510px]:max-w-[300px] shadow-lg shadow-red-900/50"
             :src="full_producer.images.jpg.image_url"
           />
           <div class="flex flex-col gap-2 w-full">

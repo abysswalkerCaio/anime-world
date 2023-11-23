@@ -20,7 +20,7 @@
             <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
           </NuxtLink>
         </div>
-        <div v-if="season_now?.data.length < 1">
+        <div v-if="season_now?.length < 1">
           <div
             class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >
@@ -34,7 +34,7 @@
           v-else
           class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
         >
-          <div v-for="animes in season_now.data">
+          <div v-for="animes in season_now">
             <AnimesAnimeCard
               :id="animes.mal_id"
               :score="animes.score"
@@ -65,7 +65,7 @@
             <font-awesome-icon :icon="'arrow-right'"></font-awesome-icon>
           </NuxtLink>
         </div>
-        <div v-if="top_anime?.data.length < 1">
+        <div v-if="top_anime?.length < 1">
           <div
             class="mt-5 flex flex-col gap-5 justify-center items-center w-full bg-clip-text text-4xl font-bold pb-4"
           >
@@ -79,7 +79,7 @@
           v-else
           class="mt-5 grid gap-5 grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3"
         >
-          <div v-for="animes in top_anime.data">
+          <div v-for="animes in top_anime">
             <AnimesAnimeCard
               :id="animes.mal_id"
               :score="animes.score"
@@ -100,11 +100,31 @@
   </main>
 </template>
 
-<script setup lang="ts">
-const { data: season_now }: any = await useFetch(
-  "https://api.jikan.moe/v4/seasons/now?limit=12"
-);
-const { data: top_anime }: any = await useFetch(
-  "https://api.jikan.moe/v4/top/anime?limit=12"
-);
+<script>
+export default {
+  data() {
+    return {
+      season_now: [],
+      top_anime: [],
+    };
+  },
+  mounted() {
+    this.loadSeasonNow();
+    this.loadTopAnimes();
+  },
+  methods: {
+    async loadSeasonNow() {
+      const data = await $fetch(
+        "https://api.jikan.moe/v4/seasons/now?limit=12"
+      ).catch((error) => error.data);
+      this.season_now = data.data;
+    },
+    async loadTopAnimes() {
+      const data = await $fetch(
+        "https://api.jikan.moe/v4/top/anime?limit=12"
+      ).catch((error) => error.data);
+      this.top_anime = data.data;
+    },
+  },
+};
 </script>

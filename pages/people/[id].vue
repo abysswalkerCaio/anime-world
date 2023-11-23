@@ -32,7 +32,7 @@
           class="flex flex-col flex-none gap-2 min-[510px]:flex-row md:flex-col md:w-[300px]"
         >
           <img
-            class="rounded-xl object-cover w-full h-[400px] min-[400px]:h-[600px] min-[510px]:h-[425px] shadow-lg shadow-red-900/50"
+            class="rounded-xl object-cover w-full h-[400px] min-[400px]:h-[600px] min-[510px]:h-[425px] min-[510px]:max-w-[300px] shadow-lg shadow-red-900/50"
             :src="full_people.images.jpg.image_url"
             :alt="full_people.name + ' image'"
           />
