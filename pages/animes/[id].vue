@@ -1,5 +1,8 @@
 <template>
   <div class="py-24">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="px-5 flex flex-col md:px-0 md:items-center">
       <div class="w-full lg:w-[984px]">
         <div class="flex items-center text-lg">
@@ -81,7 +84,7 @@
                   >
                     <NuxtLink
                       :to="`/producers/${producers.mal_id}`"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ producers.name }}</NuxtLink
                     >
                   </div>
@@ -95,7 +98,7 @@
                   >
                     <NuxtLink
                       :to="`/producers/${licensors.mal_id}`"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ licensors.name }}</NuxtLink
                     >
                   </div>
@@ -109,7 +112,7 @@
                   >
                     <NuxtLink
                       :to="`/producers/${studios.mal_id}`"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ studios.name }}</NuxtLink
                     >
                   </div>
@@ -144,7 +147,7 @@
                     <a
                       :href="external.url"
                       target="_blank"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ external.name }}</a
                     >
                   </div>
@@ -159,7 +162,7 @@
                     <a
                       :href="streaming.url"
                       target="_blank"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ streaming.name }}</a
                     >
                   </div>
@@ -310,13 +313,14 @@
 export default {
   data() {
     return {
+      title: "Anime World - ...",
       anime: [],
       anime_relations: [],
       anime_id: "",
       loading: true,
     };
   },
-  async mounted() {
+  mounted() {
     const { id } = useRoute().params;
     this.anime_id = id;
     this.loadAnime(id);
@@ -326,13 +330,13 @@ export default {
     async loadAnime(id) {
       const data = await $fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
       this.anime = data;
+      this.title = "Anime World - " + this.anime.data.title;
     },
     async loadAnimeRelations(id) {
       const data = await $fetch(
         `https://api.jikan.moe/v4/anime/${id}/relations`
       );
       this.anime_relations = data.data;
-
       this.loading = false;
     },
     formatSearch(number) {

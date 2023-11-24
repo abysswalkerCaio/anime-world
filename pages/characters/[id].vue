@@ -1,5 +1,8 @@
 <template>
   <div class="py-24">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="px-5 flex flex-col md:px-0 md:items-center">
       <div class="w-full lg:w-[984px]">
         <div class="flex items-center text-lg">
@@ -73,12 +76,11 @@
                   <div
                     v-if="full_character?.anime.length > 0"
                     v-for="anime in full_character.anime"
-                    class="flex flex-col gap-2"
                   >
                     <NuxtLink
                       v-for="anime_data in anime"
                       :to="`/animes/${anime_data.mal_id}`"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm h-full w-fit"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm h-full w-fit"
                       >{{ anime_data.title }}</NuxtLink
                     >
                   </div>
@@ -89,12 +91,11 @@
                   <div
                     v-if="full_character?.manga.length > 0"
                     v-for="manga in full_character.manga"
-                    class="flex flex-col gap-2"
                   >
                     <NuxtLink
                       v-for="manga_data in manga"
                       :to="`/mangas/${manga_data.mal_id}`"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm w-fit"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm w-fit"
                       >{{ manga_data.title }}</NuxtLink
                     >
                   </div>
@@ -174,11 +175,12 @@
 export default {
   data() {
     return {
+      title: "Anime World - ...",
       character: [],
       character_id: "",
     };
   },
-  async mounted() {
+  mounted() {
     const { id } = useRoute().params;
     this.character_id = id;
     this.loadCharacter(id);
@@ -189,6 +191,7 @@ export default {
         `https://api.jikan.moe/v4/characters/${id}/full`
       );
       this.character = data;
+      this.title = "Anime World - " + this.character.data.name;
     },
     formatSearch(number) {
       const numberFormat = new Intl.NumberFormat("pt-BR");

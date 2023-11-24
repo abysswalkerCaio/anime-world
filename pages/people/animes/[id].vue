@@ -14,7 +14,7 @@
           v-if="voices?.length > 0 && !loading"
           class="mt-10 flex flex-col gap-3"
         >
-          <h1 class="text-xl md:text-2xl mb-5 font-bold">Lista de personagens</h1>
+          <h1 class="text-xl md:text-2xl mb-5 font-bold">Lista de animes</h1>
           <div v-for="voice in voices">
             <NuxtLink
               :to="`/animes/${voice.anime.mal_id}`"

@@ -1,5 +1,8 @@
 <template>
   <div class="py-24">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="px-5 flex flex-col md:px-0 md:items-center">
       <div class="w-full lg:w-[984px]">
         <div class="flex items-center text-lg">
@@ -74,7 +77,7 @@
                   >
                     <NuxtLink
                       :to="`/people/${authors.mal_id}`"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ authors.name }}</NuxtLink
                     >
                   </div>
@@ -89,7 +92,7 @@
                     <a
                       :href="serializations.url"
                       target="_blank"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ serializations.name }}</a
                     >
                   </div>
@@ -124,7 +127,7 @@
                     <a
                       :href="external.url"
                       target="_blank"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ external.name }}</a
                     >
                   </div>
@@ -253,6 +256,7 @@
 export default {
   data() {
     return {
+      title: "Anime World - ...",
       manga: [],
       manga_relations: [],
       manga_id: "",
@@ -269,13 +273,13 @@ export default {
     async loadManga(id) {
       const data = await $fetch(`https://api.jikan.moe/v4/manga/${id}/full`);
       this.manga = data;
+      this.title = "Anime World - " + this.manga.data.title;
     },
     async loadMangaRelations(id) {
       const data = await $fetch(
         `https://api.jikan.moe/v4/manga/${id}/relations`
       );
       this.manga_relations = data.data;
-
       this.loading = false;
     },
     formatSearch(number) {

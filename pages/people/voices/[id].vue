@@ -32,6 +32,9 @@
                   <h1 class="text-lg md:text-xl">
                     {{ voice.character.name }}
                   </h1>
+                  <h2 class="text-zinc-300 md:text-lg">
+                    {{ voice.anime.title }}
+                  </h2>
                   <h2 class="text-zinc-400 md:text-lg">
                     {{ voice.role }}
                   </h2>

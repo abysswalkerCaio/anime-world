@@ -1,5 +1,8 @@
 <template>
   <div class="py-24">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="px-5 flex flex-col md:px-0 md:items-center">
       <div class="w-full lg:w-[984px]">
         <div class="flex items-center text-lg">
@@ -34,6 +37,7 @@
           <img
             class="rounded-xl object-cover w-full h-[300px] min-[400px]:h-[400px] min-[510px]:h-[325px] min-[510px]:max-w-[300px] shadow-lg shadow-red-900/50"
             :src="full_producer.images.jpg.image_url"
+            :alt="full_producer.titles[0].title + ' logo'"
           />
           <div class="flex flex-col gap-2 w-full">
             <div
@@ -66,7 +70,7 @@
                     <a
                       :href="external.url"
                       target="_blank"
-                      class="transition ease-out duration-300 hover:text-red-500 text-sm"
+                      class="underline underline-offset-4 decoration-zinc-400 transition ease-out duration-300 hover:text-red-500 hover:decoration-red-800 text-sm"
                       >{{ external.name }}</a
                     >
                   </div>
@@ -112,6 +116,7 @@
 export default {
   data() {
     return {
+      title: "Anime World - ...",
       producer: [],
       producer_id: "",
     };
@@ -127,6 +132,7 @@ export default {
         `https://api.jikan.moe/v4/producers/${id}/full`
       );
       this.producer = data;
+      this.title = "Anime World - " + this.producer.data.titles[0].title;
     },
     formatSearch(number) {
       const numberFormat = new Intl.NumberFormat("pt-BR");

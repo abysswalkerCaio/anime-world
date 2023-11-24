@@ -1,5 +1,8 @@
 <template>
   <div class="px-5 py-24 flex flex-col md:px-0 md:items-center">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="h-full w-full lg:w-[984px]">
       <div class="flex items-center text-lg">
         <NuxtLink
@@ -36,7 +39,9 @@
         <span class="font-bold">{{
           formatSearch(character_pagination.last_visible_page)
         }}</span>
-        <span v-if="character_pagination?.last_visible_page == 1"> página.</span>
+        <span v-if="character_pagination?.last_visible_page == 1">
+          página.</span
+        >
         <span v-else> páginas.</span>
       </div>
       <div
@@ -102,6 +107,7 @@
 export default {
   data() {
     return {
+      title: "Anime World - Personagens",
       loading: true,
       filter: {
         search: "",

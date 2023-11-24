@@ -149,6 +149,10 @@ export default {
     async loadPeople(id) {
       const data = await $fetch(`https://api.jikan.moe/v4/people/${id}/full`);
       this.people = data;
+
+      if (this.people.data.family_name === null) {
+        this.people.data.family_name = "";
+      }
     },
     formatSearch(number) {
       const numberFormat = new Intl.NumberFormat("pt-BR");

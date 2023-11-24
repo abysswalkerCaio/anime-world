@@ -1,5 +1,8 @@
 <template>
   <main class="px-5 py-16 flex flex-col md:px-0 md:items-center">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="h-full w-full lg:w-[984px]">
       <div
         class="flex-none h-auto w-full flex items-center justify-center text-4xl font-bold"
@@ -104,6 +107,7 @@
 export default {
   data() {
     return {
+      title: "Anime World",
       season_now: [],
       top_anime: [],
     };

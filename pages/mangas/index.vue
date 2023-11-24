@@ -1,5 +1,8 @@
 <template>
   <div class="px-5 py-24 flex flex-col md:px-0 md:items-center">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="h-full w-full lg:w-[984px]">
       <div class="flex items-center text-lg">
         <NuxtLink
@@ -104,7 +107,9 @@
       </div>
       <div
         v-if="
-          manga?.length > 0 && !loading && manga_pagination?.last_visible_page > 1
+          manga?.length > 0 &&
+          !loading &&
+          manga_pagination?.last_visible_page > 1
         "
         class="text-center"
       >
@@ -131,6 +136,7 @@
 export default {
   data() {
     return {
+      title: "Anime World - Mangás",
       loading: true,
       filter: {
         search: "",
