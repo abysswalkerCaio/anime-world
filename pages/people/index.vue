@@ -1,5 +1,8 @@
 <template>
   <div class="px-5 py-24 flex flex-col md:px-0 md:items-center">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="h-full w-full lg:w-[984px]">
       <div class="flex items-center text-lg">
         <NuxtLink
@@ -102,6 +105,7 @@
 export default {
   data() {
     return {
+      title: "Anime World - Artistas",
       loading: true,
       filter: {
         search: "",

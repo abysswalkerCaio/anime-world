@@ -1,5 +1,8 @@
 <template>
   <div class="py-24">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <div class="px-5 flex flex-col md:px-0 md:items-center">
       <div class="w-full lg:w-[984px]">
         <div class="flex items-center text-lg">
@@ -136,6 +139,7 @@
 export default {
   data() {
     return {
+      title: "Anime World - ...",
       people: [],
       people_id: "",
     };
@@ -149,6 +153,7 @@ export default {
     async loadPeople(id) {
       const data = await $fetch(`https://api.jikan.moe/v4/people/${id}/full`);
       this.people = data;
+      this.title = "Anime World - " + this.people.data.name;
 
       if (this.people.data.family_name === null) {
         this.people.data.family_name = "";
